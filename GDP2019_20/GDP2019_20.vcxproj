@@ -165,6 +165,7 @@
     <ClCompile Include="cPhysics_Ericson.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="cShaderManager.cpp" />
+    <ClCompile Include="cTank.cpp" />
     <ClCompile Include="cVAOManager.cpp" />
     <ClCompile Include="DebugRenderer\cDebugRenderer.cpp" />
     <ClCompile Include="DebugRenderer\cDebugRenderer_BuiltInShapes.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="playerController\playerController.cpp" />
     <ClCompile Include="quaternion_utils\quaternion_utils.cpp" />
     <ClCompile Include="skybox\skybox.cpp" />
+    <ClCompile Include="TankGameStuff\TankControls.cpp" />
     <ClCompile Include="TextureManager\C24BitBMPpixel.cpp" />
     <ClCompile Include="TextureManager\cBasicTextureManager.cpp" />
     <ClCompile Include="TextureManager\cGLColourHelper.cpp" />
@@ -212,6 +214,7 @@
     <ClInclude Include="cModelLoader.h" />
     <ClInclude Include="cPhysics.h" />
     <ClInclude Include="cShaderManager.h" />
+    <ClInclude Include="cTank.h" />
     <ClInclude Include="cVAOManager.h" />
     <ClInclude Include="DebugRenderer\cDebugRenderer.h" />
     <ClInclude Include="DebugRenderer\CErrorLog.h" />
@@ -228,6 +231,7 @@
     <ClInclude Include="playerController\playerController.h" />
     <ClInclude Include="quaternion_utils\quaternion_utils.hpp" />
     <ClInclude Include="skybox\skybox.h" />
+    <ClInclude Include="TankGameStuff\TankControls.h" />
     <ClInclude Include="TextureManager\C24BitBMPpixel.h" />
     <ClInclude Include="TextureManager\cBasicTextureManager.h" />
     <ClInclude Include="TextureManager\cGLColourHelper.h" />
