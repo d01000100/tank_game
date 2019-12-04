@@ -203,9 +203,6 @@
     <ClCompile Include="TankGameStuff\TankControls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cTank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cModelLoader.h">

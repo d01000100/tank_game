@@ -34,6 +34,7 @@
 #include "skybox/skybox.h"
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
 //#include "playerController/playerController.h" // playing
+#include "TankGameStuff/TankControls.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();

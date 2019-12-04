@@ -165,7 +165,6 @@
     <ClCompile Include="cPhysics_Ericson.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="cShaderManager.cpp" />
-    <ClCompile Include="cTank.cpp" />
     <ClCompile Include="cVAOManager.cpp" />
     <ClCompile Include="DebugRenderer\cDebugRenderer.cpp" />
     <ClCompile Include="DebugRenderer\cDebugRenderer_BuiltInShapes.cpp" />

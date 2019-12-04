@@ -1,337 +1,128 @@
 [
   {
-    "accel": [
-      0.0,
-      0.0,
-      0.0
-    ],
+    "accel": [ 0.0, 0.0, 0.0 ],
     "alphaTransparency": 1.0,
-    "debugColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "diffuseColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
+    "debugColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "diffuseColour": [ 1.0, 1.0, 1.0, 1.0 ],
     "friendlyName": "cameraPosition0",
     "inverseMass": 0.0,
     "isVisible": false,
     "isWireframe": false,
     "meshName": "cubeMesh",
     "meshURL": "assets/models/cube1_xyx_n_uv.ply",
-    "objectColourRGBA": [
-      0.0,
-      0.0,
-      0.0,
-      1.0
-    ],
+    "objectColourRGBA": [ 0.0, 0.0, 0.0, 1.0 ],
     "physicsShapeType": 4,
-    "positionXYZ": [
-      0.0,
-      0.0,
-      -400.0
-    ],
-    "rotationXYZ": [
-      0.0,
-      -0.0,
-      0.0
-    ],
+    "positionXYZ": [ 0.0, 0.0, -400.0 ],
+    "rotationXYZ": [ 0.0, -0.0, 0.0 ],
     "scale": 1.0,
-    "specularColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "texture": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "textureRatio": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "velocity": [
-      0.0,
-      0.0,
-      0.0
-    ]
+    "specularColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "texture": [ "", "", "", "" ],
+    "textureRatio": [ 0.0, 0.0, 0.0, 0.0 ],
+    "velocity": [ 0.0, 0.0, 0.0 ]
   },
   {
-    "accel": [
-      0.0,
-      0.0,
-      0.0
-    ],
+    "accel": [ 0.0, 0.0, 0.0 ],
     "alphaTransparency": 1.0,
-    "debugColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "diffuseColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
+    "debugColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "diffuseColour": [ 1.0, 1.0, 1.0, 1.0 ],
     "friendlyName": "cameraTarget0",
     "inverseMass": 0.0,
     "isVisible": false,
     "isWireframe": false,
     "meshName": "cubeMesh",
     "meshURL": "assets/models/cube1_xyx_n_uv.ply",
-    "objectColourRGBA": [
-      0.0,
-      0.0,
-      0.0,
-      1.0
-    ],
+    "objectColourRGBA": [ 0.0, 0.0, 0.0, 1.0 ],
     "physicsShapeType": 4,
-    "positionXYZ": [
-      0.0,
-      0.0,
-      0.0
-    ],
-    "rotationXYZ": [
-      0.0,
-      -0.0,
-      0.0
-    ],
+    "positionXYZ": [ 0.0, 0.0, 0.0 ],
+    "rotationXYZ": [ 0.0, -0.0, 0.0 ],
     "scale": 1.0,
-    "specularColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "texture": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "textureRatio": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "velocity": [
-      0.0,
-      0.0,
-      0.0
-    ]
+    "specularColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "texture": [ "", "", "", "" ],
+    "textureRatio": [ 0.0, 0.0, 0.0, 0.0 ],
+    "velocity": [ 0.0, 0.0, 0.0 ]
   },
   {
-    "accel": [
-      0.0,
-      0.0,
-      0.0
-    ],
+    "accel": [ 0.0, 0.0, 0.0 ],
     "alphaTransparency": 1.0,
-    "debugColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "diffuseColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
+    "debugColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "diffuseColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "friendlyName": "sphere",
+    "inverseMass": 0.0,
+    "isVisible": false,
+    "isWireframe": false,
+    "meshName": "meshName",
+    "meshURL": "assets/models/Sphere_Radius_1_XYZ_n_uv.ply",
+    "objectColourRGBA": [ 0.0, 0.0, 0.0, 1.0 ],
+    "physicsShapeType": 4,
+    "positionXYZ": [ 0.0, 0.0, 0.0 ],
+    "rotationXYZ": [ 0.0, -0.0, 0.0 ],
+    "scale": 1.0,
+    "specularColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "texture": [ "White.bmp", "", "", "" ],
+    "textureRatio": [ 0.0, 0.0, 0.0, 0.0 ],
+    "velocity": [ 0.0, 0.0, 0.0 ]
+  },
+  {
+    "accel": [ 0.0, 0.0, 0.0 ],
+    "alphaTransparency": 1.0,
+    "debugColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "diffuseColour": [ 1.0, 1.0, 1.0, 1.0 ],
     "friendlyName": "cube",
     "inverseMass": 0.0,
     "isVisible": false,
     "isWireframe": false,
     "meshName": "cubeMesh",
     "meshURL": "assets/models/cube1_xyx_n_uv.ply",
-    "objectColourRGBA": [
-      0.0,
-      0.0,
-      0.0,
-      1.0
-    ],
+    "objectColourRGBA": [ 0.0, 0.0, 0.0, 1.0 ],
     "physicsShapeType": 4,
-    "positionXYZ": [
-      0.0,
-      -26.0,
-      0.0
-    ],
-    "rotationXYZ": [
-      180.0,
-      85.00045013427734,
-      180.0
-    ],
+    "positionXYZ": [ 0.0, -26.0, 0.0 ],
+    "rotationXYZ": [ -180.0, 85.00045013427734, -180.0 ],
     "scale": 20.0,
-    "specularColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "texture": [
-      "whiteBrown.bmp",
-      "",
-      "",
-      ""
-    ],
-    "textureRatio": [
-      1.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "velocity": [
-      0.0,
-      0.0,
-      0.0
-    ]
+    "specularColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "texture": [ "whiteBrown.bmp", "", "", "" ],
+    "textureRatio": [ 1.0, 0.0, 0.0, 0.0 ],
+    "velocity": [ 0.0, 0.0, 0.0 ]
   },
   {
-    "accel": [
-      0.0,
-      0.0,
-      0.0
-    ],
+    "accel": [ 0.0, 0.0, 0.0 ],
     "alphaTransparency": 1.0,
-    "debugColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "diffuseColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
+    "debugColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "diffuseColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "friendlyName": "player",
+    "inverseMass": 1.0,
+    "isVisible": true,
+    "isWireframe": false,
+    "meshName": "spriteMesh",
+    "meshURL": "assets/models/sprite_tile.ply",
+    "objectColourRGBA": [ 0.0, 0.0, 0.0, 1.0 ],
+    "physicsShapeType": 4,
+    "positionXYZ": [ 175.0, -111.0, -2.0 ],
+    "rotationXYZ": [ -90.0, -0.0, 0],
+    "scale": 1.0,
+    "specularColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "texture": [ "yellowTank.bmp", "", "", "" ],
+    "textureRatio": [ 1.0, 0.0, 0.0, 0.0 ],
+    "velocity": [ 0.0, 0.0, 0.0 ]
+  },
+  {
+    "accel": [ 0.0, 0.0, 0.0 ],
+    "alphaTransparency": 1.0,
+    "debugColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "diffuseColour": [ 1.0, 1.0, 1.0, 1.0 ],
     "friendlyName": "terrain",
     "inverseMass": 0.0,
     "isVisible": true,
     "isWireframe": false,
     "meshName": "vertWallMesh",
     "meshURL": "assets/models/wall_horiz_XYZ_n_uv.ply",
-    "objectColourRGBA": [
-      0.0,
-      0.0,
-      0.0,
-      1.0
-    ],
+    "objectColourRGBA": [ 0.0, 0.0, 0.0, 1.0 ],
     "physicsShapeType": 4,
-    "positionXYZ": [
-      0.0,
-      0.0,
-      0.0
-    ],
-    "rotationXYZ": [
-      -90.0,
-      -0.0,
-      90.0
-    ],
+    "positionXYZ": [ 0.0, 0.0, 0.0 ],
+    "rotationXYZ": [ -90.0, -0.0, 90.0 ],
     "scale": 1.0,
-    "specularColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "texture": [
-      "terrain.bmp",
-      "",
-      "",
-      ""
-    ],
-    "textureRatio": [
-      1.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "velocity": [
-      0.0,
-      0.0,
-      0.0
-    ]
-  },
-  {
-    "accel": [
-      0.0,
-      0.0,
-      0.0
-    ],
-    "alphaTransparency": 1.0,
-    "debugColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "diffuseColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "friendlyName": "player",
-    "inverseMass": 0.0,
-    "isVisible": true,
-    "isWireframe": false,
-    "meshName": "spriteMesh",
-    "meshURL": "assets/models/sprite_tile.ply",
-    "objectColourRGBA": [
-      0.0,
-      0.0,
-      0.0,
-      1.0
-    ],
-    "physicsShapeType": 4,
-    "positionXYZ": [
-      175.0,
-      -111.0,
-      -2.0
-    ],
-    "rotationXYZ": [
-      -90.0,
-      -0.0,
-      90.0
-    ],
-    "scale": 1.0,
-    "specularColour": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "texture": [
-      "yellowTank.bmp",
-      "",
-      "",
-      ""
-    ],
-    "textureRatio": [
-      1.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "velocity": [
-      0.0,
-      0.0,
-      0.0
-    ]
+    "specularColour": [ 1.0, 1.0, 1.0, 1.0 ],
+    "texture": [ "terrain.bmp", "", "", "" ],
+    "textureRatio": [ 1.0, 0.0, 0.0, 0.0 ],
+    "velocity": [ 0.0, 0.0, 0.0 ]
   }
 ]

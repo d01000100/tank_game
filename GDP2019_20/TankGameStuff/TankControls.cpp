@@ -46,11 +46,11 @@ void cTankControls::updateTank()
 		// check rotation
 		if (pressedKeys.A)
 		{
-			player->updateOrientation(glm::vec3(0, -rotationStep, 0));
+			player->updateOrientation(glm::vec3(0, rotationStep, 0));
 		}
 		if (pressedKeys.D)
 		{
-			player->updateOrientation(glm::vec3(0, rotationStep, 0));
+			player->updateOrientation(glm::vec3(0, -rotationStep, 0));
 		}
 
 		// check velocity
@@ -83,7 +83,7 @@ void cTankControls::fire()
 	{
 		cGameObject* bullet4MyBible = new cGameObject(*::g_map_GameObjects["sphere"]),
 			* player = ::g_map_GameObjects[tank_name];
-		float bulletSpeed = 30.0f, lifetime = 2.0f * 60.0f;
+		float bulletSpeed = 60.0f, lifetime = 2.0f * 60.0f;
 
 		if (player)
 		{
