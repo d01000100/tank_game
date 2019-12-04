@@ -1,5 +1,7 @@
 #include "tools.h"
 
+#include "../TankGameStuff/TankControls.h"
+
 static glm::vec3 white = glm::vec3(1, 1, 1);
 static glm::vec3 red = glm::vec3(1, 0, 0);
 static glm::vec3 green = glm::vec3(0, 1, 0);
@@ -312,11 +314,13 @@ std::string GLMvec3toString(glm::vec3 theGLMvec3)
 
 void setWindowTitle(std::stringstream* ssTitle)
 {
+	*ssTitle << cTankControls::keysInfo() << " ";
 	switch (cursorType)
 	{
 	case selectedType::GAMEOBJECT:
 		*ssTitle << " object: " << selectedGameObject->first.c_str()
 			<< " posXYZ: " << GLMvec3toString(selectedGameObject->second->positionXYZ)
+			<< " vel: " << GLMvec3toString(selectedGameObject->second->velocity)
 			<< " colRGB: " << GLMvec3toString(selectedGameObject->second->objectColourRGBA);
 		break;
 	case selectedType::LIGHT:

@@ -34,6 +34,7 @@
 #include "skybox/skybox.h"
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
 //#include "playerController/playerController.h" // playing
+#include "TankGameStuff/TankControls.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
@@ -186,6 +187,9 @@ int main(void)
 	//::p_LuaScripts = new cLuaBrain();
 	//::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
 
+	// Se the tank object (by name) to the TankControls
+	cTankControls::setPlayer("player");
+
 	while (!glfwWindowShouldClose(window))
 	{
 		// Get the initial time
@@ -282,6 +286,9 @@ int main(void)
 		case selectedType::SOUND:break;
 		}
 
+		// Update the player's tank according to the state of the player's input
+		cTankControls::InputListen(window);
+
 		//	Update the objects through physics
 		averageDeltaTime = avgDeltaTimeThingy.getAverage();
 		//::p_LuaScripts->Update(averageDeltaTime);
@@ -290,7 +297,7 @@ int main(void)
 		//pPhysic->TestForCollisions(::g_map_GameObjects);
 		// ********************** AABB Runtime Stuff ********************************************
 		//testCollisions_AABB(::g_map_GameObjects["tieInterceptor"]);
-		//IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
+		IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
 		// ********************** AABB Runtime Stuff ********************************************
 		
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);

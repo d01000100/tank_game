@@ -339,6 +339,6 @@ void IntegrationStep_AAB(std::map<std::string, cGameObject*> g_map_GameObjects, 
 		}
 		lifetimeValidation(pCurObj);
 	}
-	pPlayerControl->updatePosition(pPlayerControl->pPlayer->positionXYZ);
+	//pPlayerControl->updatePosition(pPlayerControl->pPlayer->positionXYZ);
 	return;
 }
