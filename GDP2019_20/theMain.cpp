@@ -34,15 +34,6 @@
 #include "skybox/skybox.h"
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
 //#include "playerController/playerController.h" // playing
-#include "cCommands/cMoveTo_AB_Time.h" //
-#include "cCommands/cCommandGroupSerial.h"
-#include "cCommands/cCommandGroupParallel.h"
-#include "cCommands/cRotateTo_Time.hpp"
-#include "cCommands/cOrientTo_Time.hpp"
-#include "cCommands/cFollowObject.hpp"
-#include "cCommands/cBezierCurve.hpp"
-#include "cCommands/cTrigger.hpp"
-#include "cLuaBrain/cLuaBrain.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
@@ -68,7 +59,7 @@ cDebugRenderer* pDebugRenderer = new cDebugRenderer();
 cBasicTextureManager* pTextureManager = NULL;
 extern std::map<unsigned long long /*ID*/, cAABB*> g_mapAABBs_World;
 playerController* pPlayerControl;
-cLuaBrain* p_LuaScripts;
+//cLuaBrain* p_LuaScripts;
 //extern std::map<unsigned long long /*ID*/, cAABB*> g_vecAABBs_World;
 
 // pirateStuff
@@ -192,8 +183,8 @@ int main(void)
 
 	createSkyBoxObject();
 
-	::p_LuaScripts = new cLuaBrain();
-	::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
+	//::p_LuaScripts = new cLuaBrain();
+	//::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -293,7 +284,7 @@ int main(void)
 
 		//	Update the objects through physics
 		averageDeltaTime = avgDeltaTimeThingy.getAverage();
-		::p_LuaScripts->Update(averageDeltaTime);
+		//::p_LuaScripts->Update(averageDeltaTime);
 		
 		//pPhysic->IntegrationStep(::g_map_GameObjects, (float)averageDeltaTime);
 		//pPhysic->TestForCollisions(::g_map_GameObjects);
