@@ -15,7 +15,7 @@
 #include <sstream>
 #include "cFlyCamera/cFlyCamera.h"
 #include "playerController/playerController.h"
-#include "cLuaBrain/cLuaBrain.h"
+//#include "cLuaBrain/cLuaBrain.h"
 
 bool isOnlyShiftKeyDown(int mods);
 bool isOnlyCtrlKeyDown(int mods);
@@ -32,9 +32,9 @@ bool g_MouseLeftButtonIsDown = false;
 extern cFlyCamera* g_pFlyCamera;
 extern playerController* pPlayerControl;
 extern bool cameraFollowPlayer;
-extern cLuaBrain* p_LuaScripts;
-extern std::map<std::string, iCommand*> cmdDictionary;
-extern iCommand* masterCommandGroup;
+//extern cLuaBrain* p_LuaScripts;
+//extern std::map<std::string, iCommand*> cmdDictionary;
+//extern iCommand* masterCommandGroup;
 
 bool isShiftKeyDownByAlone(int mods);
 bool isCtrlKeyDownByAlone(int mods);
@@ -388,10 +388,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 			::g_map_GameObjects.clear();
 			JSONLoadGameObjects(&::g_map_GameObjects);
 			::selectedGameObject = ::g_map_GameObjects.begin();
-			
-			::cmdDictionary.clear();
-			::masterCommandGroup = NULL;
-			::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
 		}
 		if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 		{
