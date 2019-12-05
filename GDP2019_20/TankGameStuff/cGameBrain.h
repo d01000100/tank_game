@@ -3,18 +3,7 @@
 #include <vector>
 
 #include "../globalStuff.h"
-
-struct sTank
-{
-	std::string name;
-	float fireCooldown = 0;
-	bool isAlive = true;
-};
-
-struct sBullet
-{
-	std::string shooter, name;
-};
+#include "Message.h"
 
 class cGameBrain
 {
