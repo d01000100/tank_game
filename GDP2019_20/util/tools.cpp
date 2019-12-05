@@ -1,4 +1,5 @@
 #include "tools.h"
+#include "../TankGameStuff/cGameBrain.h"
 
 #include "../TankGameStuff/TankControls.h"
 
@@ -583,7 +584,27 @@ void lifetimeValidation(cGameObject* pCurObject)
 		if (pCurObject->lifetime < 1.0f)
 		{
 			::g_map_GameObjects.erase(pCurObject->friendlyName.c_str());
+
+			cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+			// if it's not a bullet, it doesn't matter
+			theGameBrain->removeBullet(pCurObject->friendlyName);
 		}
 		pCurObject->lifetime -= 1.0f;
 	}
+}
+
+void printGameObjects()
+{
+	printf("========== Game Objects =================\n");
+	for (std::map<std::string, cGameObject*>::iterator itObj = ::g_map_GameObjects.begin();
+		itObj != ::g_map_GameObjects.end(); itObj++)
+	{
+		std::string key = itObj->first;
+		cGameObject* gObj = itObj->second;
+
+		printf("key: %s, pos: %s\n",
+			key.c_str(),
+			glm::to_string(gObj->positionXYZ).c_str());
+	}
+	printf("=========================================\n");
 }

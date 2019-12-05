@@ -1,6 +1,8 @@
 #include "PhysicsAABBStuff.h"
 #include "../playerController/playerController.h"
 
+#include "../TankGameStuff/cGameBrain.h"
+
 // This will hold the AABBs for 
 std::map<unsigned long long /*ID*/, cAABB*> g_mapAABBs_World;
 const float AABBsize = 150.0f;

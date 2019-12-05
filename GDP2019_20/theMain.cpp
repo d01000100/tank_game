@@ -36,6 +36,8 @@
 //#include "playerController/playerController.h" // playing
 #include "TankGameStuff/TankControls.h"
 
+#include "TankGameStuff/cGameBrain.h"
+
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
 glm::vec3 cameraEye = glm::vec3(0.0f, 50.0f, 100.0f);
@@ -190,6 +192,12 @@ int main(void)
 	// Se the tank object (by name) to the TankControls
 	cTankControls::setPlayer("player");
 
+	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+
+	theGameBrain->addTank("player");
+	theGameBrain->addTank("enemy");
+
+
 	while (!glfwWindowShouldClose(window))
 	{
 		// Get the initial time
@@ -299,7 +307,8 @@ int main(void)
 		//testCollisions_AABB(::g_map_GameObjects["tieInterceptor"]);
 		IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
 		// ********************** AABB Runtime Stuff ********************************************
-		
+		theGameBrain->detectCollisions();
+
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
 		glfwSwapBuffers(window);

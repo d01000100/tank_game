@@ -1,11 +1,12 @@
 #include "TankControls.h"
+#include "cGameBrain.h"
 #include <string>
 #include "../GLCommon.h"
 
 sTankInputState cTankControls::pressedKeys;
 
 std::string tank_name = "player",
-	bullet_name = "tank_bullet";
+	bullet_name = "player_bullet";
 
 std::string cTankControls::keysInfo()
 {
@@ -81,21 +82,7 @@ void cTankControls::fire()
 {
 	if (!hasFired())
 	{
-		cGameObject* bullet4MyBible = new cGameObject(*::g_map_GameObjects["sphere"]),
-			* player = ::g_map_GameObjects[tank_name];
-		float bulletSpeed = 60.0f, lifetime = 2.0f * 60.0f;
-
-		if (player)
-		{
-			bullet4MyBible->positionXYZ = player->positionXYZ;
-			bullet4MyBible->velocity = player->getCurrentAT() * bulletSpeed;
-			bullet4MyBible->friendlyName = bullet_name;
-			bullet4MyBible->lifetime = lifetime;
-			bullet4MyBible->isVisible = true;
-			bullet4MyBible->inverseMass = 1.0f;
-			bullet4MyBible->tag = "lifetime";
-
-			::g_map_GameObjects[bullet_name] = bullet4MyBible;
-		}
+		cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+		theGameBrain->addBullet(tank_name);
 	}
 }

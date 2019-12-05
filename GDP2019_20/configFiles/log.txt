@@ -42,7 +42,7 @@ specularColour: vec4(1.000000, 1.000000, 1.000000, 1.000000)
 velocity: vec3(0.000000, 0.000000, 0.000000)
 accel: vec3(0.000000, 0.000000, 0.000000)
 debugColour: vec4(1.000000, 1.000000, 1.000000, 1.000000)
-friendlyName: player
+friendlyName: tank_template
 meshName: spriteMesh
 meshURL: assets/models/sprite_tile.ply
 positionXYZ: vec3(175.000000, -111.000000, -2.000000)

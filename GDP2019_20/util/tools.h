@@ -68,3 +68,5 @@ void CalculateTransformedMesh(cMesh& originalMesh, glm::mat4 matWorld, cMesh& me
 void drawAABBs();
 void drawSphere(glm::vec3 position, std::string texture, float sscale, float alphaT, float lifetime);
 void lifetimeValidation(cGameObject* pCurObject);
+
+void printGameObjects();

@@ -66,6 +66,9 @@
     <Filter Include="cLuaBrain">
       <UniqueIdentifier>{0a456b4d-3ac2-48a1-b980-5eb370b054f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TankGameStuff">
+      <UniqueIdentifier>{e7f26d30-caef-49bf-ad62-1999c1d05999}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -201,7 +204,10 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="TankGameStuff\TankControls.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>TankGameStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="TankGameStuff\cGameBrain.cpp">
+      <Filter>TankGameStuff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -337,11 +343,14 @@
     <ClInclude Include="cCommands\cRotateTo_Light.hpp">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="TankGameStuff\TankControls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cTank.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TankGameStuff\TankControls.h">
+      <Filter>TankGameStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="TankGameStuff\cGameBrain.h">
+      <Filter>TankGameStuff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

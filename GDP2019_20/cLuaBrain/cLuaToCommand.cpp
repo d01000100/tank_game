@@ -298,6 +298,7 @@ int newSerial(lua_State* L)
 	std::string type = lua_tostring(L, 2);
 	cCommandGroupSerial* CGSerial = new cCommandGroupSerial(name, type);
 	::cmdDictionary.insert({name,CGSerial});
+	return 0;
 }
 
 int newParallel(lua_State* L)
@@ -307,6 +308,7 @@ int newParallel(lua_State* L)
 	std::string type = lua_tostring(L, 2);
 	cCommandGroupParallel* CGParallel = new cCommandGroupParallel(name, type);
 	::cmdDictionary.insert({name,CGParallel});
+	return 0;
 }
 
 //CGSerial->AddCommandSerial(moveTo);
@@ -317,6 +319,7 @@ int addToSerial(lua_State* L)
 	std::string cmdGrp = lua_tostring(L, 2);
 	cCommandGroupSerial* CGSerial = (cCommandGroupSerial*)::cmdDictionary[cmdGrp];
 	CGSerial->AddCommandSerial(::cmdDictionary[name]);
+	return 0;
 }
 
 //CGParallel->AddCommandParallel(moveTo);
@@ -327,6 +330,7 @@ int addToParallel(lua_State* L)
 	std::string cmdGrp = lua_tostring(L, 2);
 	cCommandGroupParallel* CGParallel = (cCommandGroupParallel*)::cmdDictionary[cmdGrp];
 	CGParallel->AddCommandParallel(::cmdDictionary[name]);
+	return 0;
 }
 
 int setTheCommandMasterToRuleThemAll(lua_State* L)
@@ -334,4 +338,5 @@ int setTheCommandMasterToRuleThemAll(lua_State* L)
 	// sTCMTRTA(cmdGrp)
 	std::string cmdGrp = lua_tostring(L, 1);
 	::masterCommandGroup = ::cmdDictionary[cmdGrp];
+	return 0;
 }
