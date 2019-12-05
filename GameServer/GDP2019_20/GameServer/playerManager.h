@@ -13,5 +13,4 @@ struct networkPlayer {
 	string tankName;
 };
 
-void processMessage(string buffer, sockaddr_in addr);
 networkPlayer* addPlayer(sockaddr_in addr);

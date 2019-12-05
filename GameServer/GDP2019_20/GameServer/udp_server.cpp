@@ -97,12 +97,10 @@ void UDPServer::Update(void)
 	// TODO: ReadData, SendData
 	ReadData();
 
-	/*curr = std::clock();
-	elapsed_secs = (curr - prev) / double(CLOCKS_PER_SEC);
-
-	if (elapsed_secs < (1.0f / UPDATES_PER_SEC)) return;
-	prev = curr;*/
-
+	//curr = std::clock();
+	//elapsed_secs = (curr - prev) / double(CLOCKS_PER_SEC);
+	//if (elapsed_secs < (1.0f / UPDATES_PER_SEC)) return;
+	//prev = curr;
 	//UpdatePlayers();
 	//BroadcastUpdate();
 }
@@ -187,3 +185,19 @@ void UDPServer::ReadData(void)
 	// result = sendto(mListenSocket, buffer, 1, 0, (struct sockaddr*) & si_other, sizeof(si_other));
 }
 
+void UDPServer::playerDM(std::string theCoolBuffer, sockaddr_in si_other)
+{
+	int result = sendto(mListenSocket, theCoolBuffer.c_str(), theCoolBuffer.size(), 0,
+		(struct sockaddr*) &(si_other), sizeof(si_other));
+}
+
+void UDPServer::processMessage(std::string buffer, sockaddr_in addr)
+{
+	networkPlayer* tempNPlayer = NULL;
+
+	if (buffer == "holi:D")
+	{
+		tempNPlayer = addPlayer(addr);
+		playerDM(tempNPlayer->tankName, tempNPlayer->si_other);
+	}
+}

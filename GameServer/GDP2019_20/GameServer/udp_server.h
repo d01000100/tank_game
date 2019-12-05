@@ -11,6 +11,7 @@
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
 #include <vector>
+#include <string>
 
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -33,6 +34,9 @@ private:
 
 	void UpdatePlayers(void);
 	void BroadcastUpdate(void);
+	void playerDM(std::string theCoolBuffer, sockaddr_in si_other);
+	void processMessage(std::string buffer, sockaddr_in addr);
+
 
 	bool mIsRunning;
 

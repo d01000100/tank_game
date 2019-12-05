@@ -102,27 +102,28 @@ void UDPClient::Recv(void)
 		return;
 	}
 
+	std::cout << buffer << std::endl;
 	// NumPlayers
 	// Each player: { x, y }
-	unsigned int numPlayers;
-	memcpy(&numPlayers, &(buffer[0]), sizeof(unsigned int));
-
-	float x, y;
-	for (int i = 0; i < numPlayers; i++) {
-		memcpy(&x, &(buffer[i * 8 + 4]), sizeof(float));
-		memcpy(&y, &(buffer[i * 8 + 8]), sizeof(float));
-		mPlayers[i].x = x;
-		mPlayers[i].y = y;
-	}
-
-	//unsigned short port = si_other.sin_port;
-	//printf("%d : %hu received %d bytes\n", mServerSocket, port, result);
-
-	printf("%d players: {", numPlayers);
-	for (int i = 0; i < numPlayers; i++) {
-		printf(" {x: %.2f, y: %.2f}", mPlayers[i].x, mPlayers[i].y);
-	}
-	printf(" }\n");
+	//unsigned int numPlayers;
+	//memcpy(&numPlayers, &(buffer[0]), sizeof(unsigned int));
+	//
+	//float x, y;
+	//for (int i = 0; i < numPlayers; i++) {
+	//	memcpy(&x, &(buffer[i * 8 + 4]), sizeof(float));
+	//	memcpy(&y, &(buffer[i * 8 + 8]), sizeof(float));
+	//	mPlayers[i].x = x;
+	//	mPlayers[i].y = y;
+	//}
+	//
+	////unsigned short port = si_other.sin_port;
+	////printf("%d : %hu received %d bytes\n", mServerSocket, port, result);
+	//
+	//printf("%d players: {", numPlayers);
+	//for (int i = 0; i < numPlayers; i++) {
+	//	printf(" {x: %.2f, y: %.2f}", mPlayers[i].x, mPlayers[i].y);
+	//}
+	//printf(" }\n");
 }
 
 void UDPClient::Send(char* data, int numBytes)

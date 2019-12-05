@@ -11,6 +11,7 @@ void processMessage(string buffer, sockaddr_in addr)
 	if (buffer == "holi:D")
 	{
 		tempNPlayer = addPlayer(addr);
+
 	}
 }
 
