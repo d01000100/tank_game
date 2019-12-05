@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{60f6bac0-ac95-4493-9e15-40457db95f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DebugRenderer">
+      <UniqueIdentifier>{bba1383a-1a1c-4ee7-9b84-b0c6b9646a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{ff392894-8907-4e3d-8033-dd497b22c6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{2323eb35-8f0b-4d86-ac10-d17295e1f1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LightManager">
+      <UniqueIdentifier>{4d24adbe-4aca-4875-8dab-0666c5843151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LowPassFilter">
+      <UniqueIdentifier>{90db0187-9f5a-4e25-917c-0920eed7abc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{d4f3296f-40cf-4039-aee0-8225e6f1f00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="configFiles">
+      <UniqueIdentifier>{17f36e9e-9cac-4c13-a543-c29c46c73637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{d64bf26b-e5c3-4d25-8c2b-fa15f7dd68e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureManager">
+      <UniqueIdentifier>{54217f7b-d8e3-444d-99b0-8a4ad1f2fe50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{fc38cbc6-e309-47e3-8bfd-610f89a2cd62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cFlyCamera">
+      <UniqueIdentifier>{051328e9-841f-49b8-9b32-723fa307b558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="skybox">
+      <UniqueIdentifier>{116996f1-557b-426d-aa8c-e94571db01fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cAABB">
+      <UniqueIdentifier>{b6dc76ca-4208-423c-8290-c92f4a4326ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playerController">
+      <UniqueIdentifier>{508ef16c-3212-496e-8596-e5d16befb8ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{61bebe0b-da01-4b7d-b48f-52903fa3d656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bRotatable">
+      <UniqueIdentifier>{7d4292ca-5792-46a2-a2f5-c7428a494b9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="quaternion_utils">
+      <UniqueIdentifier>{6526f2c0-e57a-4e6d-ae2a-4e15f75e3f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cLuaBrain">
+      <UniqueIdentifier>{0a456b4d-3ac2-48a1-b980-5eb370b054f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TankGameStuff">
+      <UniqueIdentifier>{e7f26d30-caef-49bf-ad62-1999c1d05999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameServer">
+      <UniqueIdentifier>{dc3e2ec8-515e-4409-a4a4-ce3295ae7205}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="theMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cModelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cVAOManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cShaderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer\cDebugRenderer.cpp">
+      <Filter>DebugRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer\cDebugRenderer_BuiltInShapes.cpp">
+      <Filter>DebugRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer\COpenGLError.cpp">
+      <Filter>DebugRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer\CErrorLog.cpp">
+      <Filter>DebugRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer\cGLRenderStateHelper.cpp">
+      <Filter>DebugRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsStuff.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cPhysics_Ericson.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager\cLightHelper.cpp">
+      <Filter>LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GFLW_callbacks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cLowPassFilter.cpp">
+      <Filter>LowPassFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="cLight.cpp">
+      <Filter>LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONLoader.cpp">
+      <Filter>JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\cParticleEmitter.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager\C24BitBMPpixel.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager\cBasicTextureManager.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager\cGLColourHelper.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager\CTextureFromBMP.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="util\tools.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cFlyCamera\cFlyCamera.cpp">
+      <Filter>cFlyCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="skybox\skybox.cpp">
+      <Filter>skybox</Filter>
+    </ClCompile>
+    <ClCompile Include="cAABB\PhysicsAABBStuff.cpp">
+      <Filter>cAABB</Filter>
+    </ClCompile>
+    <ClCompile Include="playerController\playerController.cpp">
+      <Filter>playerController</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cCommandGroupSerial.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cCommandGroupParallel.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="bRotatable\bRotatable.cpp">
+      <Filter>bRotatable</Filter>
+    </ClCompile>
+    <ClCompile Include="quaternion_utils\quaternion_utils.cpp">
+      <Filter>quaternion_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cRotateTo_Time.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cOrientTo_Time.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cMoveTo_AB_Time.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cFollowObject.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cBezierCurve.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cTrigger.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cLuaBrain\cLuaBrain.cpp">
+      <Filter>cLuaBrain</Filter>
+    </ClCompile>
+    <ClCompile Include="cLuaBrain\cLuaToCommand.cpp">
+      <Filter>cLuaBrain</Filter>
+    </ClCompile>
+    <ClCompile Include="cCommands\cRotateTo_Light.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="TankGameStuff\TankControls.cpp">
+      <Filter>TankGameStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="TankGameStuff\cGameBrain.cpp">
+      <Filter>TankGameStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="GameServer\udp_server.cpp">
+      <Filter>GameServer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cModelLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cVAOManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cShaderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer\cDebugRenderer.h">
+      <Filter>DebugRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer\iDebugRenderer.h">
+      <Filter>DebugRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer\COpenGLError.h">
+      <Filter>DebugRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer\CErrorLog.h">
+      <Filter>DebugRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer\cGLRenderStateHelper.h">
+      <Filter>DebugRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="cPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsStuff.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager\cLightHelper.h">
+      <Filter>LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GFLW_callbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globalStuff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cLowPassFilter.h">
+      <Filter>LowPassFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="cLight.h">
+      <Filter>LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONLoader.h">
+      <Filter>JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\cParticleEmitter.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager\C24BitBMPpixel.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager\cBasicTextureManager.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager\cGLColourHelper.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager\CTextureFromBMP.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="util\tools.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cFlyCamera\cFlyCamera.h">
+      <Filter>cFlyCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox\skybox.h">
+      <Filter>skybox</Filter>
+    </ClInclude>
+    <ClInclude Include="cAABB\cAABB.h">
+      <Filter>cAABB</Filter>
+    </ClInclude>
+    <ClInclude Include="cAABB\PhysicsAABBStuff.h">
+      <Filter>cAABB</Filter>
+    </ClInclude>
+    <ClInclude Include="playerController\playerController.h">
+      <Filter>playerController</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cCommandGroupParallel.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cCommandGroupSerial.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cMoveTo_AB_Time.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\iCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="bRotatable\bRotatable.hpp">
+      <Filter>bRotatable</Filter>
+    </ClInclude>
+    <ClInclude Include="quaternion_utils\quaternion_utils.hpp">
+      <Filter>quaternion_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cRotateTo_Time.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cOrientTo_Time.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cFollowObject.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cBezierCurve.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cTrigger.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cLuaBrain\cLuaBrain.h">
+      <Filter>cLuaBrain</Filter>
+    </ClInclude>
+    <ClInclude Include="cLuaBrain\cLuaToCommand.hpp">
+      <Filter>cLuaBrain</Filter>
+    </ClInclude>
+    <ClInclude Include="cCommands\cRotateTo_Light.hpp">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="cTank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TankGameStuff\TankControls.h">
+      <Filter>TankGameStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="TankGameStuff\cGameBrain.h">
+      <Filter>TankGameStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="GameServer\udp_server.h">
+      <Filter>GameServer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\fragmentShader01.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="assets\shaders\vertexShader01.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\TODO_Feeney.notes" />
+    <None Include="configFiles\2spheres.json">
+      <Filter>configFiles</Filter>
+    </None>
+    <None Include="configFiles\bkpgameObjects.json">
+      <Filter>configFiles</Filter>
+    </None>
+    <None Include="configFiles\gameObjects.json">
+      <Filter>configFiles</Filter>
+    </None>
+    <None Include="configFiles\lights.json">
+      <Filter>configFiles</Filter>
+    </None>
+    <None Include="configFiles\meshToLoad.json">
+      <Filter>configFiles</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="configFiles\log.txt">
+      <Filter>configFiles</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
