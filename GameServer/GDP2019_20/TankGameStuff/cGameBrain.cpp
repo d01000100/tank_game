@@ -11,20 +11,19 @@ cGameBrain* cGameBrain::getTheGameBrain()
 	return theGameBrain;
 }
 
-void cGameBrain::addTank(std::string name)
+std::string cGameBrain::addTank()
 {
 	cGameObject* newTank = new cGameObject(::g_map_GameObjects["tank_template"]);
 	// determine randomly??
 	newTank->positionXYZ = glm::vec3(0,0, -2.0);
-	newTank->friendlyName = name;
 	newTank->isVisible = true;
 
-	::g_map_GameObjects[name] = newTank;
+	::g_map_GameObjects.insert({newTank->friendlyName,newTank});
 
 	sTank* gameTank = new sTank();
-	gameTank->name = name;
+	gameTank->name = newTank->friendlyName;
 
-	tanks.push_back(gameTank);
+	this->tanks.push_back(gameTank);
 }
 
 void cGameBrain::detectCollisions()

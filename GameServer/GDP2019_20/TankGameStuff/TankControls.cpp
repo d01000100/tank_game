@@ -1,7 +1,6 @@
 #include "TankControls.h"
 #include "cGameBrain.h"
 #include <string>
-#include "../GLCommon.h"
 
 sTankInputState cTankControls::pressedKeys;
 
@@ -38,38 +37,43 @@ void cTankControls::InputListen(GLFWwindow* window)
 
 void cTankControls::updateTank()
 {
-	cGameObject* player = ::g_map_GameObjects[tank_name];
-	if (player)
+	std::map<std::string, cGameObject*>::iterator itGO;
+	itGO = ::g_map_GameObjects.find(tank_name);
+	if (itGO != ::g_map_GameObjects.end())
 	{
-		glm::vec3 velocity = glm::vec3(0);
-		float rotationStep = 2.0f, speed = 10.0f;
+		cGameObject* player = ::g_map_GameObjects[tank_name];
+		if (player)
+		{
+			glm::vec3 velocity = glm::vec3(0);
+			float rotationStep = 2.0f, speed = 10.0f;
 
-		// check rotation
-		if (pressedKeys.A)
-		{
-			player->updateOrientation(glm::vec3(0, rotationStep, 0));
-		}
-		if (pressedKeys.D)
-		{
-			player->updateOrientation(glm::vec3(0, -rotationStep, 0));
-		}
+			// check rotation
+			if (pressedKeys.A)
+			{
+				player->updateOrientation(glm::vec3(0, rotationStep, 0));
+			}
+			if (pressedKeys.D)
+			{
+				player->updateOrientation(glm::vec3(0, -rotationStep, 0));
+			}
 
-		// check velocity
-		if (pressedKeys.W)
-		{
-			velocity += player->getCurrentAT() * speed;
-		}
-		if (pressedKeys.S)
-		{
-			velocity += player->getCurrentAT() * -speed;
-		}
+			// check velocity
+			if (pressedKeys.W)
+			{
+				velocity += player->getCurrentAT() * speed;
+			}
+			if (pressedKeys.S)
+			{
+				velocity += player->getCurrentAT() * -speed;
+			}
 
-		if (pressedKeys.Space)
-		{
-			fire();
-		}
+			if (pressedKeys.Space)
+			{
+				fire();
+			}
 
-		player->velocity = velocity;
+			player->velocity = velocity;
+		}
 	}
 }
 

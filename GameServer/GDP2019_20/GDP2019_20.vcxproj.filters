@@ -215,6 +215,9 @@
     <ClCompile Include="GameServer\udp_server.cpp">
       <Filter>GameServer</Filter>
     </ClCompile>
+    <ClCompile Include="GameServer\playerManager.cpp">
+      <Filter>GameServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cModelLoader.h">
@@ -359,6 +362,9 @@
       <Filter>TankGameStuff</Filter>
     </ClInclude>
     <ClInclude Include="GameServer\udp_server.h">
+      <Filter>GameServer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameServer\playerManager.h">
       <Filter>GameServer</Filter>
     </ClInclude>
   </ItemGroup>

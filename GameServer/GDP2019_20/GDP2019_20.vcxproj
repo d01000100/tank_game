@@ -171,6 +171,7 @@
     <ClCompile Include="DebugRenderer\CErrorLog.cpp" />
     <ClCompile Include="DebugRenderer\cGLRenderStateHelper.cpp" />
     <ClCompile Include="DebugRenderer\COpenGLError.cpp" />
+    <ClCompile Include="GameServer\playerManager.cpp" />
     <ClCompile Include="GameServer\udp_server.cpp" />
     <ClCompile Include="GFLW_callbacks.cpp" />
     <ClCompile Include="glad.c" />
@@ -222,6 +223,7 @@
     <ClInclude Include="DebugRenderer\cGLRenderStateHelper.h" />
     <ClInclude Include="DebugRenderer\COpenGLError.h" />
     <ClInclude Include="DebugRenderer\iDebugRenderer.h" />
+    <ClInclude Include="GameServer\playerManager.h" />
     <ClInclude Include="GameServer\udp_server.h" />
     <ClInclude Include="GFLW_callbacks.h" />
     <ClInclude Include="GLCommon.h" />

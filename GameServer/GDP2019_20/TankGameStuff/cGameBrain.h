@@ -24,7 +24,7 @@ private:
 	static cGameBrain* theGameBrain;
 public:
 	static cGameBrain* getTheGameBrain();
-	void addTank(std::string name);
+	std::string addTank();
 	void removeBullet(std::string name);
 	void addBullet(std::string shooterName);
 	void detectCollisions();

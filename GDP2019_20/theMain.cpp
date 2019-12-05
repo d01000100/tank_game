@@ -201,6 +201,7 @@ int main(void)
 	client.CreateSocket("127.0.0.1", 5150);
 	std::string ch = "holi:D";
 	client.Send((char*)(ch.c_str()), ch.size());
+	std::cout << "sent: " << ch << std::endl;
 
 
 	while (!glfwWindowShouldClose(window))

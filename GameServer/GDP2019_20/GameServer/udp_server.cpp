@@ -1,23 +1,12 @@
 #include "udp_server.h"
 
-#include <winsock.h>
-#include <WS2tcpip.h>
+//#include <winsock.h>
+//#include <WS2tcpip.h>
 
 #include <ctime>
 #include <string>
 #include <iostream>
-
-struct Player {
-	unsigned short port; // their id;
-	struct sockaddr_in si_other;
-	float x;
-	float y;
-	bool up, down, right, left;
-};
-
-unsigned int numPlayersConnected = 0;
-
-std::vector<Player> mPlayers;
+#include "playerManager.h"
 
 const float UPDATES_PER_SEC = 5;		// 5Hz / 200ms per update / 5 updates per second
 std::clock_t curr;
@@ -42,7 +31,6 @@ UDPServer::UDPServer(void)
 	, mListenSocket(INVALID_SOCKET)
 	, mAcceptSocket(INVALID_SOCKET)
 {
-	mPlayers.resize(8);
 
 	// WinSock vars
 	WSAData		WSAData;
@@ -83,7 +71,7 @@ UDPServer::UDPServer(void)
 	printf("[SERVER] Ready to receive a datagram...\n");
 
 	mIsRunning = true;
-	prev = std::clock();
+	//prev = std::clock();
 } // end UDPServer
 
 UDPServer::~UDPServer(void)
@@ -109,62 +97,62 @@ void UDPServer::Update(void)
 	// TODO: ReadData, SendData
 	ReadData();
 
-	curr = std::clock();
+	/*curr = std::clock();
 	elapsed_secs = (curr - prev) / double(CLOCKS_PER_SEC);
 
 	if (elapsed_secs < (1.0f / UPDATES_PER_SEC)) return;
-	prev = curr;
+	prev = curr;*/
 
-	UpdatePlayers();
-	BroadcastUpdate();
+	//UpdatePlayers();
+	//BroadcastUpdate();
 }
 
-void UDPServer::UpdatePlayers(void)
-{
-	for (int i = 0; i < numPlayersConnected; i++) {
-		if (mPlayers[i].up) mPlayers[i].y += 10.0f * elapsed_secs;
-		if (mPlayers[i].down) mPlayers[i].y -= 10.0f * elapsed_secs;
-		if (mPlayers[i].right) mPlayers[i].x += 10.0f * elapsed_secs;
-		if (mPlayers[i].left) mPlayers[i].x -= 10.0f * elapsed_secs;
-	}
-}
-
-void UDPServer::BroadcastUpdate(void)
-{
-	// create our data to send, then send the same data to all players
-	const int DEFAULT_BUFLEN = 512;
-	char buffer[512];
-	memset(buffer, '\0', DEFAULT_BUFLEN);
-
-	memcpy(&(buffer[0]), &numPlayersConnected, sizeof(unsigned int));
-
-	for (int i = 0; i < numPlayersConnected; i++) {
-		float x = mPlayers[i].x;
-		float y = mPlayers[i].y;
-		memcpy(&(buffer[i * 8 + 4]), &x, sizeof(float));
-		memcpy(&(buffer[i * 8 + 8]), &y, sizeof(float));
-	}
-
-	int result = sendto(mListenSocket, buffer, 12, 0,
-		(struct sockaddr*) & (mPlayers[0].si_other), sizeof(mPlayers[0].si_other));
-}
-
-
-
-Player* GetPlayerByPort(unsigned short port, struct sockaddr_in si_other)
-{
-	// If a player with this port is already connected, return it
-	for (int i = 0; i < mPlayers.size(); i++) {
-		if (mPlayers[i].port == port) return &(mPlayers[i]);
-	}
-
-	// Otherwise create a new player, and return that one!
-	mPlayers[numPlayersConnected].port = port;
-	mPlayers[numPlayersConnected].x = 0.0f;
-	mPlayers[numPlayersConnected].y = 0.0f;
-	mPlayers[numPlayersConnected].si_other = si_other;
-	return &(mPlayers[numPlayersConnected++]);
-}
+//void UDPServer::UpdatePlayers(void)
+//{
+//	for (int i = 0; i < numPlayersConnected; i++) {
+//		if (mPlayers[i].up) mPlayers[i].y += 10.0f * elapsed_secs;
+//		if (mPlayers[i].down) mPlayers[i].y -= 10.0f * elapsed_secs;
+//		if (mPlayers[i].right) mPlayers[i].x += 10.0f * elapsed_secs;
+//		if (mPlayers[i].left) mPlayers[i].x -= 10.0f * elapsed_secs;
+//	}
+//}
+//
+//void UDPServer::BroadcastUpdate(void)
+//{
+//	// create our data to send, then send the same data to all players
+//	const int DEFAULT_BUFLEN = 512;
+//	char buffer[512];
+//	memset(buffer, '\0', DEFAULT_BUFLEN);
+//
+//	memcpy(&(buffer[0]), &numPlayersConnected, sizeof(unsigned int));
+//
+//	for (int i = 0; i < numPlayersConnected; i++) {
+//		float x = mPlayers[i].x;
+//		float y = mPlayers[i].y;
+//		memcpy(&(buffer[i * 8 + 4]), &x, sizeof(float));
+//		memcpy(&(buffer[i * 8 + 8]), &y, sizeof(float));
+//	}
+//
+//	int result = sendto(mListenSocket, buffer, 12, 0,
+//		(struct sockaddr*) & (mPlayers[0].si_other), sizeof(mPlayers[0].si_other));
+//}
+//
+//
+//
+//Player* GetPlayerByPort(unsigned short port, struct sockaddr_in si_other)
+//{
+//	// If a player with this port is already connected, return it
+//	for (int i = 0; i < mPlayers.size(); i++) {
+//		if (mPlayers[i].port == port) return &(mPlayers[i]);
+//	}
+//
+//	// Otherwise create a new player, and return that one!
+//	mPlayers[numPlayersConnected].port = port;
+//	mPlayers[numPlayersConnected].x = 0.0f;
+//	mPlayers[numPlayersConnected].y = 0.0f;
+//	mPlayers[numPlayersConnected].si_other = si_other;
+//	return &(mPlayers[numPlayersConnected++]);
+//}
 
 void UDPServer::ReadData(void)
 {
@@ -191,6 +179,9 @@ void UDPServer::ReadData(void)
 	unsigned short port = si_other.sin_port;
 
 	std::cout << buffer << std::endl;
+
+	std::string theCoolBuffer = std::string(buffer);
+	processMessage(theCoolBuffer, si_other);
 
 	// Send the data back to the client
 	// result = sendto(mListenSocket, buffer, 1, 0, (struct sockaddr*) & si_other, sizeof(si_other));

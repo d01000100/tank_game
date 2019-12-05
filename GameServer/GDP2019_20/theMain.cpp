@@ -33,7 +33,6 @@
 #include "cFlyCamera/cFlyCamera.h"
 #include "skybox/skybox.h"
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
-#include "TankGameStuff/TankControls.h"
 #include "TankGameStuff/cGameBrain.h"
 #include "GameServer/udp_server.h"
 
@@ -190,13 +189,9 @@ int main(void)
 	//::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
 
 	// Se the tank object (by name) to the TankControls
-	cTankControls::setPlayer("player");
+	//cTankControls::setPlayer("player");
 
 	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
-
-	theGameBrain->addTank("player");
-	theGameBrain->addTank("enemy");
-
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -295,7 +290,7 @@ int main(void)
 		}
 
 		// Update the player's tank according to the state of the player's input
-		cTankControls::InputListen(window);
+		//cTankControls::InputListen(window);
 
 		//	Update the objects through physics
 		averageDeltaTime = avgDeltaTimeThingy.getAverage();
