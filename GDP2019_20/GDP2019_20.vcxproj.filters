@@ -69,6 +69,9 @@
     <Filter Include="TankGameStuff">
       <UniqueIdentifier>{e7f26d30-caef-49bf-ad62-1999c1d05999}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameClient">
+      <UniqueIdentifier>{6412c885-8217-400e-a2dd-e82cc9ed8c9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="theMain.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="TankGameStuff\cGameBrain.cpp">
       <Filter>TankGameStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClient\udp_client.cpp">
+      <Filter>GameClient</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +357,9 @@
     </ClInclude>
     <ClInclude Include="TankGameStuff\cGameBrain.h">
       <Filter>TankGameStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClient\udp_client.h">
+      <Filter>GameClient</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

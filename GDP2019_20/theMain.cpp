@@ -33,10 +33,9 @@
 #include "cFlyCamera/cFlyCamera.h"
 #include "skybox/skybox.h"
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
-//#include "playerController/playerController.h" // playing
 #include "TankGameStuff/TankControls.h"
-
 #include "TankGameStuff/cGameBrain.h"
+#include "GameClient/udp_client.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
@@ -61,7 +60,9 @@ cDebugRenderer* pDebugRenderer = new cDebugRenderer();
 //cPhysics* pPhysic = new cPhysics();
 cBasicTextureManager* pTextureManager = NULL;
 extern std::map<unsigned long long /*ID*/, cAABB*> g_mapAABBs_World;
-playerController* pPlayerControl;
+UDPClient client;
+
+//playerController* pPlayerControl;
 //cLuaBrain* p_LuaScripts;
 //extern std::map<unsigned long long /*ID*/, cAABB*> g_vecAABBs_World;
 
@@ -197,6 +198,10 @@ int main(void)
 	theGameBrain->addTank("player");
 	theGameBrain->addTank("enemy");
 
+	client.CreateSocket("127.0.0.1", 5150);
+	std::string ch = "holi:D";
+	client.Send((char*)(ch.c_str()), ch.size());
+
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -310,6 +315,8 @@ int main(void)
 		theGameBrain->detectCollisions();
 
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
+
+		client.Update();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
