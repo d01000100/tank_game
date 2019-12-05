@@ -44,7 +44,7 @@ SendBuffer writeMessage(GameStateMessage* message) {
 
 	for (int t = 0; t < message->tanks.size(); t++)
 	{
-		sTank* tank = message->tanks[t];
+		sMessageTank* tank = message->tanks[t];
 		//    int      string     int          int
 		//[name_length][name][fire_cooldown][is_alive]
 		buffer.writeInt(tank->name.size());
@@ -56,7 +56,7 @@ SendBuffer writeMessage(GameStateMessage* message) {
 
 	for (int t = 0; t < message->bullets.size(); t++)
 	{
-		sBullet* bullet = message->bullets[t];
+		sMessageBullet* bullet = message->bullets[t];
 		//    int      string     int          string
 		//[name_length][name][shooter_lenght][shooter]
 		buffer.writeInt(bullet->name.size());
@@ -111,7 +111,7 @@ Message* readMessage(RecieveBuffer buffer) {
 
 		for (int t = 0; t < nTanks; t++)
 		{
-			sTank* tank = new sTank();
+			sMessageTank* tank = new sMessageTank();
 			//    int      string     int          int
 			//[name_length][name][fire_cooldown][is_alive]
 			int name_length = buffer.readInt();
@@ -124,7 +124,7 @@ Message* readMessage(RecieveBuffer buffer) {
 
 		for (int t = 0; t < nBullets; t++)
 		{
-			sBullet* Bullet = new sBullet();
+			sMessageBullet* Bullet = new sMessageBullet();
 			//    int      string     int          string
 			//[name_length][name][shooter_length][shooter]
 			int name_length = buffer.readInt();
@@ -138,7 +138,7 @@ Message* readMessage(RecieveBuffer buffer) {
 	}
 	default:
 		Message *m = new Message();
-		m->type = ERROR;
+		m->type = UNOWN;
 		return m;
 		break;
 	}

@@ -5,6 +5,18 @@
 #include "../globalStuff.h"
 #include "Message.h"
 
+struct sTank
+{
+	std::string name;
+	float fireCooldown = 0;
+	bool isAlive = true;
+};
+
+struct sBullet
+{
+	std::string shooter, name;
+};
+
 class cGameBrain
 {
 private:

@@ -35,6 +35,7 @@
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
 #include "TankGameStuff/cGameBrain.h"
 #include "GameServer/udp_server.h"
+#include "ProtocolManager.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();

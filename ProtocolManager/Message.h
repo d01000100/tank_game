@@ -3,7 +3,7 @@
 #include <vector>
 
 enum MessageType {
-	OLI, NAME, USER_INPUT, GAME_STATE, ERROR
+	OLI, NAME, USER_INPUT, GAME_STATE, UNOWN
 };
 
 std::string messageTypeString(MessageType t);
@@ -32,21 +32,21 @@ public:
 	UserInputMessage();
 };
 
-struct sTank
+struct sMessageTank
 {
 	std::string name;
 	float fireCooldown = 0;
 	bool isAlive = true;
 };
 
-struct sBullet
+struct sMessageBullet
 {
 	std::string shooter, name;
 };
 
 class GameStateMessage : public Message {
 public:
-	std::vector<sTank*> tanks;
-	std::vector<sBullet*> bullets;
+	std::vector<sMessageTank*> tanks;
+	std::vector<sMessageBullet*> bullets;
 	GameStateMessage();
 };
