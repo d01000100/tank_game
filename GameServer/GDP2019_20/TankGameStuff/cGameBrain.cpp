@@ -24,6 +24,7 @@ std::string cGameBrain::addTank()
 	gameTank->name = newTank->friendlyName;
 
 	this->tanks.push_back(gameTank);
+	return gameTank->name;
 }
 
 void cGameBrain::detectCollisions()

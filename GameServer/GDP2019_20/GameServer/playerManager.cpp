@@ -7,6 +7,7 @@ std::vector<networkPlayer*> mPlayers;
 void processMessage(string buffer, sockaddr_in addr)
 {
 	networkPlayer* tempNPlayer = NULL;
+
 	if (buffer == "holi:D")
 	{
 		tempNPlayer = addPlayer(addr);
