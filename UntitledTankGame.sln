@@ -8,6 +8,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProtocolManager", "ProtocolManager\ProtocolManager.vcxproj", "{F11AD382-E51A-4024-8F79-79E0F12393F4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePlayer", "GamePlayer\GamePlayer.vcxproj", "{AC89A0D6-36A9-4B42-948D-5A55BA436D9A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F11AD382-E51A-4024-8F79-79E0F12393F4} = {F11AD382-E51A-4024-8F79-79E0F12393F4}
+		{C9258DEB-D848-4CF9-95AE-A813421B1FF4} = {C9258DEB-D848-4CF9-95AE-A813421B1FF4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServer", "GameServer\GameServer.vcxproj", "{02AD78AF-D068-4C01-BCCB-891A8E49D594}"
 EndProject

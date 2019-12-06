@@ -13,6 +13,7 @@ std::string messageTypeString(MessageType t);
 class Message {
 public:
 	MessageType type;
+	int theLength;
 };
 
 class OliMessage : public Message {
@@ -35,13 +36,18 @@ public:
 struct sMessageTank
 {
 	std::string name;
-	float fireCooldown = 0;
-	bool isAlive = true;
+	int fireCooldown = 0;
+	int isAlive = 1;
+	int xV,yV,zV;
+	int xP,yP,zP;
+	int degrees;
 };
 
 struct sMessageBullet
 {
 	std::string shooter, name;
+	int xV,yV,zV;
+	int xP,yP,zP;
 };
 
 class GameStateMessage : public Message {
