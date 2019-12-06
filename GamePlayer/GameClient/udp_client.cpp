@@ -1,6 +1,7 @@
 #include "udp_client.h"
 #include "ProtocolManager.h"
 #include "../TankGameStuff/TankControls.h"
+#include "sceneManager.h"
 
 #include <bitset>
 #include <iostream>
@@ -105,7 +106,7 @@ void processMessage(char* data, int len)
 	case GAME_STATE:
 		GameStateMessage* gameState = (GameStateMessage*)clearMessage;
 		// TODO: Reset Game Scene
-
+		renderScene(gameState);
 		break;
 	}
 }

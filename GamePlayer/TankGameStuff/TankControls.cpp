@@ -2,6 +2,7 @@
 #include "cGameBrain.h"
 #include <string>
 #include "../GLCommon.h"
+#include "../util/tools.h"
 
 sTankInputState cTankControls::pressedKeys;
 
@@ -38,9 +39,9 @@ void cTankControls::InputListen(GLFWwindow* window)
 
 void cTankControls::updateTank()
 {
-	cGameObject* player = ::g_map_GameObjects[tank_name];
-	if (player)
+	if (pFindObjectByFriendlyNameMap(tank_name))
 	{
+		cGameObject* player = ::g_map_GameObjects[tank_name];
 		glm::vec3 velocity = glm::vec3(0);
 		float rotationStep = 2.0f, speed = 10.0f;
 
@@ -75,7 +76,7 @@ void cTankControls::updateTank()
 
 bool cTankControls::hasFired()
 {
-	return ::g_map_GameObjects[bullet_name] != NULL;
+	return pFindObjectByFriendlyNameMap(bullet_name);
 }
 
 void cTankControls::fire()

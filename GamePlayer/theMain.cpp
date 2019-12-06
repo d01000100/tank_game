@@ -193,12 +193,12 @@ int main(void)
 	//::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
 
 	// Se the tank object (by name) to the TankControls
-	cTankControls::setPlayer("player");
+	// cTankControls::setPlayer("player");
 
 	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
 
-	theGameBrain->addTank("player");
-	theGameBrain->addTank("enemy");
+	// theGameBrain->addTank("player");
+	// theGameBrain->addTank("enemy");
 
 	client.CreateSocket("127.0.0.1", 5150);
 	std::string ch = "holi:D";

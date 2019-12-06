@@ -215,6 +215,9 @@
     <ClCompile Include="GameClient\udp_client.cpp">
       <Filter>GameClient</Filter>
     </ClCompile>
+    <ClCompile Include="GameClient\sceneManager.cpp">
+      <Filter>GameClient</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cModelLoader.h">
@@ -359,6 +362,9 @@
       <Filter>TankGameStuff</Filter>
     </ClInclude>
     <ClInclude Include="GameClient\udp_client.h">
+      <Filter>GameClient</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClient\sceneManager.h">
       <Filter>GameClient</Filter>
     </ClInclude>
   </ItemGroup>
