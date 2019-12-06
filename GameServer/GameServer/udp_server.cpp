@@ -7,11 +7,10 @@
 #include <string>
 #include <iostream>
 #include "playerManager.h"
+#include "ProtocolManager.h"
+#include "../TankGameStuff/cGameBrain.h"
 
-const float UPDATES_PER_SEC = 5;		// 5Hz / 200ms per update / 5 updates per second
-std::clock_t curr;
-std::clock_t prev;
-double elapsed_secs;
+const float PING = 0.2; // 5Hz / 200ms per update / 5 updates per second
 
 
 void _PrintWSAError(const char* file, int line)
@@ -90,66 +89,62 @@ void UDPServer::SetNonBlocking(SOCKET socket)
 	}
 }
 
-void UDPServer::Update(void)
+void UDPServer::Update(float deltaTime)
 {
 	if (!mIsRunning) return;
 
 	// TODO: ReadData, SendData
 	ReadData();
 
-	//curr = std::clock();
-	//elapsed_secs = (curr - prev) / double(CLOCKS_PER_SEC);
-	//if (elapsed_secs < (1.0f / UPDATES_PER_SEC)) return;
-	//prev = curr;
-	//UpdatePlayers();
-	//BroadcastUpdate();
+	timer += deltaTime;
+
+	if (timer > PING)
+	{
+		BroadcastGameState();
+		timer = 0;
+	}
 }
 
 //void UDPServer::UpdatePlayers(void)
 //{
 //	for (int i = 0; i < numPlayersConnected; i++) {
-//		if (mPlayers[i].up) mPlayers[i].y += 10.0f * elapsed_secs;
-//		if (mPlayers[i].down) mPlayers[i].y -= 10.0f * elapsed_secs;
-//		if (mPlayers[i].right) mPlayers[i].x += 10.0f * elapsed_secs;
-//		if (mPlayers[i].left) mPlayers[i].x -= 10.0f * elapsed_secs;
+//		if (vOnlinePlayers[i].up) vOnlinePlayers[i].y += 10.0f * elapsed_secs;
+//		if (vOnlinePlayers[i].down) vOnlinePlayers[i].y -= 10.0f * elapsed_secs;
+//		if (vOnlinePlayers[i].right) vOnlinePlayers[i].x += 10.0f * elapsed_secs;
+//		if (vOnlinePlayers[i].left) vOnlinePlayers[i].x -= 10.0f * elapsed_secs;
 //	}
 //}
 //
-//void UDPServer::BroadcastUpdate(void)
-//{
-//	// create our data to send, then send the same data to all players
-//	const int DEFAULT_BUFLEN = 512;
-//	char buffer[512];
-//	memset(buffer, '\0', DEFAULT_BUFLEN);
-//
-//	memcpy(&(buffer[0]), &numPlayersConnected, sizeof(unsigned int));
-//
-//	for (int i = 0; i < numPlayersConnected; i++) {
-//		float x = mPlayers[i].x;
-//		float y = mPlayers[i].y;
-//		memcpy(&(buffer[i * 8 + 4]), &x, sizeof(float));
-//		memcpy(&(buffer[i * 8 + 8]), &y, sizeof(float));
-//	}
-//
-//	int result = sendto(mListenSocket, buffer, 12, 0,
-//		(struct sockaddr*) & (mPlayers[0].si_other), sizeof(mPlayers[0].si_other));
-//}
+void UDPServer::BroadcastGameState()
+{
+	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+	GameStateMessage* mState = theGameBrain->encodeGameState();
+	SendBuffer encodedMessage = writeMessage(mState);
+
+	for (int i = 0; i < vOnlinePlayers.size(); i++) {
+		int result = sendto(mListenSocket, (char*)encodedMessage.buffer, encodedMessage.getDataLength(), 0,
+			(struct sockaddr*) & (vOnlinePlayers[i]->si_other), sizeof(vOnlinePlayers[i]->si_other));
+		printf("Sent to %s %i bytes\n",
+			vOnlinePlayers[i]->tankName.c_str(),
+			result);
+	}
+}
 //
 //
 //
 //Player* GetPlayerByPort(unsigned short port, struct sockaddr_in si_other)
 //{
 //	// If a player with this port is already connected, return it
-//	for (int i = 0; i < mPlayers.size(); i++) {
-//		if (mPlayers[i].port == port) return &(mPlayers[i]);
+//	for (int i = 0; i < vOnlinePlayers.size(); i++) {
+//		if (vOnlinePlayers[i].port == port) return &(vOnlinePlayers[i]);
 //	}
 //
 //	// Otherwise create a new player, and return that one!
-//	mPlayers[numPlayersConnected].port = port;
-//	mPlayers[numPlayersConnected].x = 0.0f;
-//	mPlayers[numPlayersConnected].y = 0.0f;
-//	mPlayers[numPlayersConnected].si_other = si_other;
-//	return &(mPlayers[numPlayersConnected++]);
+//	vOnlinePlayers[numPlayersConnected].port = port;
+//	vOnlinePlayers[numPlayersConnected].x = 0.0f;
+//	vOnlinePlayers[numPlayersConnected].y = 0.0f;
+//	vOnlinePlayers[numPlayersConnected].si_other = si_other;
+//	return &(vOnlinePlayers[numPlayersConnected++]);
 //}
 
 void UDPServer::ReadData(void)
@@ -167,7 +162,7 @@ void UDPServer::ReadData(void)
 		PrintWSAError();
 
 		// For a TCP connection you would close this socket, and remove it from 
-		// your list of connections. For UDP we will clear our buffer, and just
+		// your list of connections. For UDP we will clear our serializedMessage, and just
 		// ignore this.
 		memset(buffer, '\0', 512);
 		return;
@@ -182,12 +177,12 @@ void UDPServer::ReadData(void)
 	processMessage(theCoolBuffer, si_other);
 
 	// Send the data back to the client
-	// result = sendto(mListenSocket, buffer, 1, 0, (struct sockaddr*) & si_other, sizeof(si_other));
+	// result = sendto(mListenSocket, serializedMessage, 1, 0, (struct sockaddr*) & si_other, sizeof(si_other));
 }
 
-void UDPServer::playerDM(std::string theCoolBuffer, sockaddr_in si_other)
+void UDPServer::playerDM(char* message, int size, sockaddr_in si_other)
 {
-	int result = sendto(mListenSocket, theCoolBuffer.c_str(), theCoolBuffer.size(), 0,
+	int result = sendto(mListenSocket, message, size, 0,
 		(struct sockaddr*) &(si_other), sizeof(si_other));
 }
 
@@ -198,6 +193,11 @@ void UDPServer::processMessage(std::string buffer, sockaddr_in addr)
 	if (buffer == "holi:D")
 	{
 		tempNPlayer = addPlayer(addr);
-		playerDM(tempNPlayer->tankName, tempNPlayer->si_other);
+
+		NameMessage* message = new NameMessage();
+		message->tank_name = tempNPlayer->tankName;
+		SendBuffer serializedMessage = writeMessage(message);
+
+		playerDM((char*)serializedMessage.buffer, serializedMessage.getDataLength(), tempNPlayer->si_other);
 	}
 }

@@ -1,4 +1,6 @@
 #include "udp_client.h"
+#include "ProtocolManager.h"
+#include "../TankGameStuff/TankControls.h"
 
 #include <bitset>
 #include <iostream>
@@ -82,6 +84,32 @@ void UDPClient::Update(void)
 	Recv();
 }
 
+void processMessage(char* data, int len)
+{
+	RecieveBuffer serializedMessage;
+	serializedMessage.buffer = (unsigned char*)data;
+	serializedMessage.setDataRecieved(1024);
+	Message* clearMessage = readMessage(serializedMessage);
+
+	std::cout << "received a: " << messageTypeString(clearMessage->type) << std::endl;
+
+	switch (clearMessage->type)
+	{
+	case NAME:
+	{
+		NameMessage* message = (NameMessage*)clearMessage;
+		std::cout << "soy: " << message->tank_name << std::endl;
+		cTankControls::setPlayer(message->tank_name);
+		break;
+	}
+	case GAME_STATE:
+		GameStateMessage* gameState = (GameStateMessage*)clearMessage;
+		// TODO: Reset Game Scene
+
+		break;
+	}
+}
+
 void UDPClient::Recv(void)
 {
 	struct sockaddr_in si_other;
@@ -102,7 +130,8 @@ void UDPClient::Recv(void)
 		return;
 	}
 
-	std::cout << buffer << std::endl;
+	if (result > 0)
+		processMessage(buffer, result);
 	// NumPlayers
 	// Each player: { x, y }
 	//unsigned int numPlayers;

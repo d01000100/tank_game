@@ -125,3 +125,51 @@ void cGameBrain::addBullet(std::string shooterName)
 		::g_map_GameObjects[newBullet->name] = bullet4MyBible;
 	}
 }
+
+GameStateMessage* cGameBrain::encodeGameState()
+{
+	GameStateMessage* state = new GameStateMessage();
+	for (std::vector<sTank*>::iterator iterT = tanks.begin();
+		iterT != tanks.end(); iterT++)
+	{
+		sTank* pTank = *iterT;
+		if (pFindObjectByFriendlyNameMap(pTank->name))
+		{
+			cGameObject* gTank = ::g_map_GameObjects[pTank->name];
+			sMessageTank *mTank = new sMessageTank();
+			mTank->name = pTank->name;
+			mTank->fireCooldown = pTank->fireCooldown;
+			mTank->isAlive = pTank->isAlive;
+			mTank->xP = gTank->positionXYZ.x;
+			mTank->yP = gTank->positionXYZ.y;
+			mTank->zP = gTank->positionXYZ.z;
+			mTank->xV = gTank->velocity.x;
+			mTank->yV = gTank->velocity.y;
+			mTank->zV = gTank->velocity.z;
+			mTank->degrees = gTank->getEulerAngle().y;
+			state->tanks.push_back(mTank);
+		}
+	}
+
+	for (std::vector<sBullet*>::iterator iterB = bullets.begin();
+		iterB != bullets.end(); )
+	{
+		sBullet* pBullet = *iterB;
+		if (pFindObjectByFriendlyNameMap(pBullet->name))
+		{
+			cGameObject* gBullet = ::g_map_GameObjects[pBullet->name];
+			sMessageBullet* mBullet = new sMessageBullet();
+			mBullet->name = pBullet->name;
+			mBullet->shooter = pBullet->shooter;
+			mBullet->xP = gBullet->positionXYZ.x;
+			mBullet->yP = gBullet->positionXYZ.y;
+			mBullet->zP = gBullet->positionXYZ.z;
+			mBullet->xV = gBullet->velocity.x;
+			mBullet->yV = gBullet->velocity.y;
+			mBullet->zV = gBullet->velocity.z;
+			state->bullets.push_back(mBullet);
+		}
+	}
+
+	return state;
+}

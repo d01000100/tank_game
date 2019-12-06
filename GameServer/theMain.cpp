@@ -306,7 +306,7 @@ int main(void)
 		theGameBrain->detectCollisions();
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
-		server.Update();
+		server.Update(averageDeltaTime);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "../globalStuff.h"
+#include "Message.h"
 
 struct sTank
 {
@@ -29,5 +30,6 @@ public:
 	void addBullet(std::string shooterName);
 	void detectCollisions();
 	sTank* findShooter(std::string);
+	GameStateMessage* encodeGameState();
 };
 

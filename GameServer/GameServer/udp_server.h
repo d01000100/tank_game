@@ -26,22 +26,19 @@ public:
 	UDPServer(void);
 	~UDPServer(void);
 
-	void Update(void);
-
+	void Update(float deltaTime);
 private:
 	void SetNonBlocking(SOCKET socket);
 	void ReadData(void);
-
-	void UpdatePlayers(void);
-	void BroadcastUpdate(void);
-	void playerDM(std::string theCoolBuffer, sockaddr_in si_other);
+	void BroadcastGameState(void);
+	void playerDM(char* theCoolBuffer, int size, sockaddr_in si_other);
 	void processMessage(std::string buffer, sockaddr_in addr);
 
 
 	bool mIsRunning;
 
 	FD_SET mReadSet;
-	timeval mTv;
+	float timer;
 	SOCKET mAcceptSocket;
 	SOCKET mListenSocket;
 };
