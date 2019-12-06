@@ -32,7 +32,7 @@ private:
 	void ReadData(void);
 	void BroadcastGameState(void);
 	void playerDM(char* theCoolBuffer, int size, sockaddr_in si_other);
-	void processMessage(std::string buffer, sockaddr_in addr);
+	void processMessage(char* buffer, sockaddr_in addr);
 
 
 	bool mIsRunning;

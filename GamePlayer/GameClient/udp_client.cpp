@@ -2,6 +2,7 @@
 #include "ProtocolManager.h"
 #include "../TankGameStuff/TankControls.h"
 #include "sceneManager.h"
+#include "ProtocolManager.h"
 
 #include <bitset>
 #include <iostream>
@@ -11,6 +12,8 @@ struct Player {
 };
 
 std::vector<Player> mPlayers;
+
+const float PING = 0.2; // 5Hz / 200ms per update / 5 updates per second
 
 void _PrintWSAError(const char* file, int line)
 {
@@ -46,6 +49,8 @@ UDPClient::UDPClient(void)
 		PrintWSAError();
 		return;
 	}
+
+	timer = 0;
 }
 
 UDPClient::~UDPClient(void)
@@ -80,9 +85,24 @@ void UDPClient::CreateSocket(string ip, int port)
 	SetNonBlocking(mServerSocket);
 }
 
-void UDPClient::Update(void)
+void UDPClient::Update(float deltaTime)
 {
 	Recv();
+
+	timer += deltaTime;
+
+	if (timer >= PING)
+	{
+		sendInput();
+		timer = 0;
+	}
+}
+
+void UDPClient::sendInput()
+{
+	SendBuffer serializedInput = writeMessage(&cTankControls::pressedKeys);
+	Send((char*)serializedInput.buffer, serializedInput.getDataLength());
+	cTankControls::updateTank();
 }
 
 void processMessage(char* data, int len)
@@ -92,7 +112,7 @@ void processMessage(char* data, int len)
 	serializedMessage.setDataRecieved(1024);
 	Message* clearMessage = readMessage(serializedMessage);
 
-	std::cout << "received a: " << messageTypeString(clearMessage->type) << std::endl;
+	//std::cout << "received a: " << messageTypeString(clearMessage->type) << std::endl;
 
 	switch (clearMessage->type)
 	{
@@ -105,7 +125,6 @@ void processMessage(char* data, int len)
 	}
 	case GAME_STATE:
 		GameStateMessage* gameState = (GameStateMessage*)clearMessage;
-		// TODO: Reset Game Scene
 		renderScene(gameState);
 		break;
 	}
@@ -172,5 +191,5 @@ void UDPClient::Send(char* data, int numBytes)
 		return;
 	}
 
-	// printf("Number of bytes sent: %d\n", result);
+	 printf("Number of bytes sent: %d\n", result);
 }

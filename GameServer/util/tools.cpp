@@ -315,7 +315,7 @@ std::string GLMvec3toString(glm::vec3 theGLMvec3)
 
 void setWindowTitle(std::stringstream* ssTitle)
 {
-	*ssTitle << cTankControls::keysInfo() << " ";
+	*ssTitle << "Server | ";
 	switch (cursorType)
 	{
 	case selectedType::GAMEOBJECT:

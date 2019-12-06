@@ -17,3 +17,4 @@ struct networkPlayer {
 extern std::vector<networkPlayer*> vOnlinePlayers;
 
 networkPlayer* addPlayer(sockaddr_in addr);
+networkPlayer* findPlayer(sockaddr_in addr);

@@ -25,3 +25,11 @@ networkPlayer* addPlayer(sockaddr_in addr)
 	return nwPlayer;
 }
 
+networkPlayer* findPlayer(sockaddr_in addr)
+{
+	for (int i = 0; i < vOnlinePlayers.size(); i++) {
+		if (vOnlinePlayers[i]->si_other.sin_port == addr.sin_port)
+			return vOnlinePlayers[i];
+	}
+	return NULL;
+}

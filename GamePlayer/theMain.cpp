@@ -201,10 +201,9 @@ int main(void)
 	// theGameBrain->addTank("enemy");
 
 	client.CreateSocket("127.0.0.1", 5150);
-	std::string ch = "holi:D";
-	client.Send((char*)(ch.c_str()), ch.size());
-	std::cout << "sent: " << ch << std::endl;
 
+	SendBuffer serializedHoli = writeMessage(new OliMessage());
+	client.Send((char*)serializedHoli.buffer, serializedHoli.getDataLength());
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -319,7 +318,7 @@ int main(void)
 
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
-		client.Update();
+		client.Update(averageDeltaTime);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -4,7 +4,7 @@
 #include "../GLCommon.h"
 #include "../util/tools.h"
 
-sTankInputState cTankControls::pressedKeys;
+UserInputMessage cTankControls::pressedKeys;
 
 std::string tank_name = "player",
 	bullet_name = "player_bullet";
@@ -33,8 +33,6 @@ void cTankControls::InputListen(GLFWwindow* window)
 	pressedKeys.D = glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS;
 	pressedKeys.W = glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS;
 	pressedKeys.Space = glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS;
-
-	updateTank();
 }
 
 void cTankControls::updateTank()

@@ -14,9 +14,10 @@ void renderScene(GameStateMessage* gameState)
         //     int isAlive = 1;
         tempTank->friendlyName = smT->name;
         tempTank->velocity = glm::vec3(smT->xV,smT->yV,smT->zV);
+		tempTank->isVisible = true;
         tempTank->positionXYZ = glm::vec3(smT->xP,smT->yP,smT->zP);
         tempTank->updateOrientation(glm::vec3(0,smT->degrees,0));
-        ::g_map_GameObjects.insert({tempTank->friendlyName,tempTank});
+        ::g_map_GameObjects[tempTank->friendlyName] = tempTank;
     }
 
     for (int i = 0; i < bulletz.size(); i++)
@@ -27,8 +28,9 @@ void renderScene(GameStateMessage* gameState)
         //     int fireCooldown = 0;
         //     int isAlive = 1;
         tempBullet->friendlyName = smB->name;
+		tempBullet->isVisible = true;
         tempBullet->velocity = glm::vec3(smB->xV,smB->yV,smB->zV);
         tempBullet->positionXYZ = glm::vec3(smB->xP,smB->yP,smB->zP);
-        ::g_map_GameObjects.insert({tempBullet->friendlyName,tempBullet});
+        ::g_map_GameObjects[tempBullet->friendlyName] = tempBullet;
     }
 }

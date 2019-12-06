@@ -27,7 +27,7 @@ public:
 	~UDPClient(void);
 
 	void CreateSocket(string ip, int port);
-	void Update(void);
+	void Update(float deltaTime);
 
 	void Send(char* data, int numBytes);
 
@@ -35,7 +35,9 @@ public:
 private:
 	void SetNonBlocking(SOCKET socket);
 	void Recv(void);
+	void sendInput();
 
 	SOCKET mServerSocket;
 	struct sockaddr_in si_other;
+	float timer;
 };

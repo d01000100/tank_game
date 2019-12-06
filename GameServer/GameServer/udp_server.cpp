@@ -9,6 +9,7 @@
 #include "playerManager.h"
 #include "ProtocolManager.h"
 #include "../TankGameStuff/cGameBrain.h"
+#include "../TankGameStuff/TankControls.h"
 
 const float PING = 0.2; // 5Hz / 200ms per update / 5 updates per second
 
@@ -124,28 +125,11 @@ void UDPServer::BroadcastGameState()
 	for (int i = 0; i < vOnlinePlayers.size(); i++) {
 		int result = sendto(mListenSocket, (char*)encodedMessage.buffer, encodedMessage.getDataLength(), 0,
 			(struct sockaddr*) & (vOnlinePlayers[i]->si_other), sizeof(vOnlinePlayers[i]->si_other));
-		printf("Sent to %s %i bytes\n",
-			vOnlinePlayers[i]->tankName.c_str(),
-			result);
+		//printf("Sent to %s %i bytes\n",
+		//	vOnlinePlayers[i]->tankName.c_str(),
+		//	result);
 	}
 }
-//
-//
-//
-//Player* GetPlayerByPort(unsigned short port, struct sockaddr_in si_other)
-//{
-//	// If a player with this port is already connected, return it
-//	for (int i = 0; i < vOnlinePlayers.size(); i++) {
-//		if (vOnlinePlayers[i].port == port) return &(vOnlinePlayers[i]);
-//	}
-//
-//	// Otherwise create a new player, and return that one!
-//	vOnlinePlayers[numPlayersConnected].port = port;
-//	vOnlinePlayers[numPlayersConnected].x = 0.0f;
-//	vOnlinePlayers[numPlayersConnected].y = 0.0f;
-//	vOnlinePlayers[numPlayersConnected].si_other = si_other;
-//	return &(vOnlinePlayers[numPlayersConnected++]);
-//}
 
 void UDPServer::ReadData(void)
 {
@@ -167,14 +151,7 @@ void UDPServer::ReadData(void)
 		memset(buffer, '\0', 512);
 		return;
 	}
-
-
-	unsigned short port = si_other.sin_port;
-
-	std::cout << buffer << std::endl;
-
-	std::string theCoolBuffer = std::string(buffer);
-	processMessage(theCoolBuffer, si_other);
+	processMessage(buffer, si_other);
 
 	// Send the data back to the client
 	// result = sendto(mListenSocket, serializedMessage, 1, 0, (struct sockaddr*) & si_other, sizeof(si_other));
@@ -186,11 +163,19 @@ void UDPServer::playerDM(char* message, int size, sockaddr_in si_other)
 		(struct sockaddr*) &(si_other), sizeof(si_other));
 }
 
-void UDPServer::processMessage(std::string buffer, sockaddr_in addr)
+void UDPServer::processMessage(char* buffer, sockaddr_in addr)
 {
 	networkPlayer* tempNPlayer = NULL;
+	RecieveBuffer serializedMessage;
+	serializedMessage.buffer = (unsigned char*)buffer;
+	serializedMessage.setDataRecieved(1024);
+	Message* clearMessage = readMessage(serializedMessage);
 
-	if (buffer == "holi:D")
+	std::cout << "received a: " << messageTypeString(clearMessage->type) << std::endl;
+
+	switch (clearMessage->type)
+	{
+	case OLI:
 	{
 		tempNPlayer = addPlayer(addr);
 
@@ -199,5 +184,17 @@ void UDPServer::processMessage(std::string buffer, sockaddr_in addr)
 		SendBuffer serializedMessage = writeMessage(message);
 
 		playerDM((char*)serializedMessage.buffer, serializedMessage.getDataLength(), tempNPlayer->si_other);
+		break;
+	}
+	case USER_INPUT:
+	{
+		UserInputMessage* userInput = (UserInputMessage*)clearMessage;
+		networkPlayer* playerReceived = findPlayer(addr);
+		cTankControls::updateTank(playerReceived->tankName, *userInput);
+		break;
+	}
+	default:
+		printf("Unknown messsage recieved\n");
+		break;
 	}
 }
