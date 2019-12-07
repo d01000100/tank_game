@@ -15,7 +15,7 @@ void renderScene(GameStateMessage* gameState)
         tempTank->inverseMass = 1.0f;
         tempTank->friendlyName = smT->name;
         tempTank->velocity = glm::vec3(smT->xV,smT->yV,smT->zV);
-		tempTank->isVisible = true;
+		tempTank->isVisible = smT->isAlive;
         tempTank->positionXYZ = glm::vec3(smT->xP,smT->yP,smT->zP);
         tempTank->setOrientation(glm::vec3(-90,0,smT->degrees));
         ::g_map_GameObjects[tempTank->friendlyName] = tempTank;
@@ -32,7 +32,7 @@ void renderScene(GameStateMessage* gameState)
         tempBullet->lifetime = smB->lifetime;
         tempBullet->tag = "lifetime";
         tempBullet->friendlyName = smB->name;
-		tempBullet->isVisible = true;
+		tempBullet->isVisible = smB->lifetime != 0;
         tempBullet->velocity = glm::vec3(smB->xV,smB->yV,smB->zV);
         tempBullet->positionXYZ = glm::vec3(smB->xP,smB->yP,smB->zP);
         ::g_map_GameObjects[tempBullet->friendlyName] = tempBullet;

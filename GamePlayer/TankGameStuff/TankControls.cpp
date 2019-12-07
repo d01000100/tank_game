@@ -65,7 +65,7 @@ void cTankControls::updateTank()
 
 		if (pressedKeys.Space)
 		{
-			fire();
+			//fire();
 		}
 
 		player->velocity = velocity;

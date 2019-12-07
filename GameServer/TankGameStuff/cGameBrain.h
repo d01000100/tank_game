@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#include <map>
 #include "../globalStuff.h"
 #include "Message.h"
 
@@ -15,13 +15,14 @@ struct sTank
 struct sBullet
 {
 	std::string shooter, name;
+	float lifetime = 2.0f * 60.0f;
 };
 
 class cGameBrain
 {
 private:
 	std::vector<sTank*> tanks;
-	std::vector<sBullet*> bullets;
+	std::map<std::string, sBullet*> mBullets;
 	static cGameBrain* theGameBrain;
 public:
 	static cGameBrain* getTheGameBrain();

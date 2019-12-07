@@ -48,7 +48,7 @@ bool cTankControls::canFire(std::string shooterName)
 {
 	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
 	sTank* pTank = theGameBrain->get_sTank(shooterName);
-	if(pTank->fireCooldown <= 0)
+	if(pTank->fireCooldown <= 0 && pTank->isAlive)
 	{
 		return true;
 	}

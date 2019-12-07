@@ -11,8 +11,7 @@
 #include "../TankGameStuff/cGameBrain.h"
 #include "../TankGameStuff/TankControls.h"
 
-const float PING = 0.2; // 5Hz / 200ms per update / 5 updates per second
-
+const float PING = 1.0 / 5.0; // 5Hz / 200ms per update / 5 updates per second
 
 void _PrintWSAError(const char* file, int line)
 {

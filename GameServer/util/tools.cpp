@@ -584,10 +584,6 @@ void lifetimeValidation(cGameObject* pCurObject)
 		if (pCurObject->lifetime < 1.0f)
 		{
 			::g_map_GameObjects.erase(pCurObject->friendlyName.c_str());
-
-			cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
-			// if it's not a bullet, it doesn't matter
-			theGameBrain->removeBullet(pCurObject->friendlyName);
 		}
 		pCurObject->lifetime -= 1.0f;
 	}

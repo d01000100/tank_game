@@ -13,7 +13,7 @@ struct Player {
 
 std::vector<Player> mPlayers;
 
-const float PING = 0.2; // 5Hz / 200ms per update / 5 updates per second
+const float PING = 1.0f / 5.0f; // 5Hz / 200ms per update / 5 updates per second / 
 
 void _PrintWSAError(const char* file, int line)
 {

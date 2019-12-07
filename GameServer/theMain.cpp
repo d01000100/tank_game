@@ -303,11 +303,10 @@ int main(void)
 		//testCollisions_AABB(::g_map_GameObjects["tieInterceptor"]);
 		IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
 		// ********************** AABB Runtime Stuff ********************************************
-		theGameBrain->detectCollisions();
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
-		server.Update(averageDeltaTime);
 		theGameBrain->Update(averageDeltaTime);
+		server.Update(averageDeltaTime);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -33,16 +33,16 @@ void cGameBrain::detectCollisions()
 		iterT != tanks.end(); iterT++)
 	{
 		sTank* pTank = *iterT;
-		for (std::vector<sBullet*>::iterator iterB = bullets.begin() ;
-			iterB != bullets.end(); )
+		for (std::map<std::string, sBullet*>::iterator iterB = mBullets.begin() ;
+			iterB != mBullets.end(); )
 		{
-			sBullet* pBullet = *iterB;
-			cGameObject* pTankObj = ::g_map_GameObjects[pTank->name];
-			cGameObject* pBulletObj = ::g_map_GameObjects[pBullet->name];
-
-
-			if (pBulletObj && pTankObj)
+			sBullet* pBullet = iterB->second;
+			std::string shooter_name = iterB->first;
+			if (pFindObjectByFriendlyNameMap(pTank->name) && 
+				pFindObjectByFriendlyNameMap(pBullet->name))
 			{
+				cGameObject* pTankObj = ::g_map_GameObjects[pTank->name];
+				cGameObject* pBulletObj = ::g_map_GameObjects[pBullet->name];
 
 				float distance = glm::distance(pTankObj->positionXYZ, pBulletObj->positionXYZ);
 
@@ -53,6 +53,7 @@ void cGameBrain::detectCollisions()
 				{
 					// I kill the tank
 					pTank->isAlive = false;
+					pTankObj->isVisible = false;
 
 					// I reset the shooter's fireCooldown
 					sTank *shooter = findShooter(pBullet->shooter);
@@ -62,8 +63,7 @@ void cGameBrain::detectCollisions()
 					// from the scene
 					::g_map_GameObjects.erase(pBullet->name);
 
-					// and from the game state
-					iterB = bullets.erase(iterB);
+					pBullet->lifetime = 0;
 					continue;
 				}
 			}
@@ -87,15 +87,7 @@ sTank* cGameBrain::findShooter(std::string tankName)
 
 void cGameBrain::removeBullet(std::string name)
 {
-	for (std::vector<sBullet*>::iterator iterB = bullets.begin();
-		iterB != bullets.end(); iterB++)
-	{
-		if ((*iterB)->name == name)
-		{
-			bullets.erase(iterB);
-			return;
-		}
-	}
+	// no es necesario
 }
 
 void cGameBrain::addBullet(std::string shooterName)
@@ -104,12 +96,12 @@ void cGameBrain::addBullet(std::string shooterName)
 	sBullet* newBullet = new sBullet();
 	newBullet->name = shooterName + "_bullet";
 	newBullet->shooter = shooterName;
-	bullets.push_back(newBullet);
+	mBullets[shooterName] = newBullet;
 
 	// add in the scene
 	cGameObject* bullet4MyBible = new cGameObject(*::g_map_GameObjects["sphere"]);
 	std::map<std::string, cGameObject*>::iterator itPlayer = ::g_map_GameObjects.find(shooterName);
-	float bulletSpeed = 60.0f, lifetime = 2.0f * 60.0f;
+	float bulletSpeed = 60.0f;
 
 	if (itPlayer != ::g_map_GameObjects.end())
 	{
@@ -117,7 +109,7 @@ void cGameBrain::addBullet(std::string shooterName)
 		bullet4MyBible->positionXYZ = player->positionXYZ;
 		bullet4MyBible->velocity = player->getCurrentAT() * bulletSpeed;
 		bullet4MyBible->friendlyName = newBullet->name;
-		bullet4MyBible->lifetime = lifetime;
+		bullet4MyBible->lifetime = newBullet->lifetime;
 		bullet4MyBible->isVisible = true;
 		bullet4MyBible->inverseMass = 1.0f;
 		bullet4MyBible->tag = "lifetime";
@@ -151,25 +143,25 @@ GameStateMessage* cGameBrain::encodeGameState()
 		}
 	}
 
-	for (std::vector<sBullet*>::iterator iterB = bullets.begin();
-		iterB != bullets.end(); iterB++)
+	for (std::map<std::string, sBullet*>::iterator iterB = mBullets.begin();
+		iterB != mBullets.end(); iterB++)
 	{
-		sBullet* pBullet = *iterB;
+		sBullet* pBullet = iterB->second;
+		sMessageBullet* mBullet = new sMessageBullet();
+		mBullet->name = pBullet->name;
+		mBullet->shooter = pBullet->shooter;
 		if (pFindObjectByFriendlyNameMap(pBullet->name))
 		{
 			cGameObject* gBullet = ::g_map_GameObjects[pBullet->name];
-			sMessageBullet* mBullet = new sMessageBullet();
-			mBullet->name = pBullet->name;
-			mBullet->shooter = pBullet->shooter;
 			mBullet->xP = gBullet->positionXYZ.x;
 			mBullet->yP = gBullet->positionXYZ.y;
 			mBullet->zP = gBullet->positionXYZ.z;
 			mBullet->xV = gBullet->velocity.x;
 			mBullet->yV = gBullet->velocity.y;
 			mBullet->zV = gBullet->velocity.z;
-			mBullet->lifetime = gBullet->lifetime;
-			state->bullets.push_back(mBullet);
 		}
+		mBullet->lifetime = pBullet->lifetime;
+		state->bullets.push_back(mBullet);
 	}
 
 	return state;
@@ -200,4 +192,5 @@ void cGameBrain::Update(float deltatime)
 			pTank->fireCooldown -= deltatime;
 		}
 	}
+	detectCollisions();
 }
