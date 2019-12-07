@@ -146,13 +146,13 @@ GameStateMessage* cGameBrain::encodeGameState()
 			mTank->xV = gTank->velocity.x;
 			mTank->yV = gTank->velocity.y;
 			mTank->zV = gTank->velocity.z;
-			mTank->degrees = gTank->getEulerAngle().y;
+			mTank->degrees = gTank->getEulerAngle().z;
 			state->tanks.push_back(mTank);
 		}
 	}
 
 	for (std::vector<sBullet*>::iterator iterB = bullets.begin();
-		iterB != bullets.end(); )
+		iterB != bullets.end(); iterB++)
 	{
 		sBullet* pBullet = *iterB;
 		if (pFindObjectByFriendlyNameMap(pBullet->name))
@@ -167,9 +167,37 @@ GameStateMessage* cGameBrain::encodeGameState()
 			mBullet->xV = gBullet->velocity.x;
 			mBullet->yV = gBullet->velocity.y;
 			mBullet->zV = gBullet->velocity.z;
+			mBullet->lifetime = gBullet->lifetime;
 			state->bullets.push_back(mBullet);
 		}
 	}
 
 	return state;
+}
+
+sTank* cGameBrain::get_sTank(std::string tankName)
+{
+	for (std::vector<sTank*>::iterator iterT = tanks.begin();
+		iterT != tanks.end(); iterT++)
+	{
+		sTank* pTank = *iterT;
+		if(pTank->name == tankName)
+		{
+			return pTank;
+		}
+	}
+	return NULL;
+}
+
+void cGameBrain::Update(float deltatime)
+{
+	for (std::vector<sTank*>::iterator iterT = tanks.begin();
+		iterT != tanks.end(); iterT++)
+	{
+		sTank* pTank = *iterT;
+		if(pTank->fireCooldown >= 0)
+		{
+			pTank->fireCooldown -= deltatime;
+		}
+	}
 }

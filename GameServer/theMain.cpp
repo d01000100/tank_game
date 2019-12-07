@@ -94,7 +94,7 @@ int main(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-	window = glfwCreateWindow(1280, 720, "Simple example", NULL, NULL);
+	window = glfwCreateWindow(800, 500, "Simple example", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -307,6 +307,7 @@ int main(void)
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
 		server.Update(averageDeltaTime);
+		theGameBrain->Update(averageDeltaTime);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

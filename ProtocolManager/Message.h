@@ -48,6 +48,7 @@ struct sMessageBullet
 	std::string shooter, name;
 	int xV,yV,zV;
 	int xP,yP,zP;
+	int lifetime;
 };
 
 class GameStateMessage : public Message {

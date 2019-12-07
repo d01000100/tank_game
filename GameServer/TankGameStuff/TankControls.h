@@ -8,8 +8,8 @@ class cTankControls
 {
 public:
 	static void updateTank(std::string tankName, UserInputMessage input);
-	static void fire();
+	static void fire(std::string shooterName);
 	static std::string keysInfo();
-	static bool hasFired();
+	static bool canFire(std::string shooterName);
 };
 

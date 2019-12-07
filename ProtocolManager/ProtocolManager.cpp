@@ -84,6 +84,7 @@ SendBuffer writeMessage(GameStateMessage* message) {
 		buffer.writeInt(bullet->xP);
 		buffer.writeInt(bullet->yP);
 		buffer.writeInt(bullet->zP);
+		buffer.writeInt(bullet->lifetime);
 	}
 	return buffer;
 }
@@ -174,6 +175,7 @@ Message* readMessage(RecieveBuffer buffer) {
 			Bullet->xP = buffer.readInt();
 			Bullet->yP = buffer.readInt();
 			Bullet->zP = buffer.readInt();
+			Bullet->lifetime = buffer.readInt();
 			message->bullets.push_back(Bullet);
 		}
 		return message;

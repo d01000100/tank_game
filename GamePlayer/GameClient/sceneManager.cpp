@@ -12,11 +12,12 @@ void renderScene(GameStateMessage* gameState)
         // TODO:
         //     int fireCooldown = 0;
         //     int isAlive = 1;
+        tempTank->inverseMass = 1.0f;
         tempTank->friendlyName = smT->name;
         tempTank->velocity = glm::vec3(smT->xV,smT->yV,smT->zV);
 		tempTank->isVisible = true;
         tempTank->positionXYZ = glm::vec3(smT->xP,smT->yP,smT->zP);
-        tempTank->updateOrientation(glm::vec3(0,smT->degrees,0));
+        tempTank->setOrientation(glm::vec3(-90,0,smT->degrees));
         ::g_map_GameObjects[tempTank->friendlyName] = tempTank;
     }
 
@@ -27,6 +28,9 @@ void renderScene(GameStateMessage* gameState)
         // TODO:
         //     int fireCooldown = 0;
         //     int isAlive = 1;
+        tempBullet->inverseMass = 1.0f;
+        tempBullet->lifetime = smB->lifetime;
+        tempBullet->tag = "lifetime";
         tempBullet->friendlyName = smB->name;
 		tempBullet->isVisible = true;
         tempBullet->velocity = glm::vec3(smB->xV,smB->yV,smB->zV);

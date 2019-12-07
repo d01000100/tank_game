@@ -30,6 +30,9 @@ public:
 	void addBullet(std::string shooterName);
 	void detectCollisions();
 	sTank* findShooter(std::string);
+	sTank* get_sTank(std::string tankName);
 	GameStateMessage* encodeGameState();
+
+	void Update(float deltatime);
 };
 

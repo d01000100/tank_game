@@ -34,23 +34,31 @@ void cTankControls::updateTank(std::string tankName, UserInputMessage pressedKey
 
 		if (pressedKeys.Space)
 		{
-			fire();
+			if(canFire(player->friendlyName))
+			{
+				fire(player->friendlyName);
+			}
 		}
 
 		player->velocity = velocity;
 	}
 }
 
-bool cTankControls::hasFired()
+bool cTankControls::canFire(std::string shooterName)
 {
-	return true;
+	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+	sTank* pTank = theGameBrain->get_sTank(shooterName);
+	if(pTank->fireCooldown <= 0)
+	{
+		return true;
+	}
+	return false;
 }
 
-void cTankControls::fire()
+void cTankControls::fire(std::string shooterName)
 {
-	if (!hasFired())
-	{
-		cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
-		theGameBrain->addBullet("");
-	}
+	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+	theGameBrain->addBullet(shooterName);
+	sTank* pTank = theGameBrain->get_sTank(shooterName);
+	pTank->fireCooldown = 2.0f;
 }
