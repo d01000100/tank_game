@@ -41,7 +41,7 @@ void cTankControls::updateTank()
 	{
 		cGameObject* player = ::g_map_GameObjects[tank_name];
 		glm::vec3 velocity = glm::vec3(0);
-		float rotationStep = 2.0f, speed = 10.0f;
+		float rotationStep = 4.0f, speed = 10.0f;
 
 		// check rotation
 		if (pressedKeys.A)

@@ -10,7 +10,7 @@ void cTankControls::updateTank(std::string tankName, UserInputMessage pressedKey
 	{
 		cGameObject* player = itGO->second;
 		glm::vec3 velocity = glm::vec3(0);
-		float rotationStep = 2.0f, speed = 10.0f;
+		float rotationStep = 4.0f, speed = 10.0f;
 
 		// check rotation
 		if (pressedKeys.A)
@@ -52,6 +52,12 @@ bool cTankControls::canFire(std::string shooterName)
 	{
 		return true;
 	}
+	else if (!pTank->isAlive)
+	{
+		pTank->isAlive = true;
+		::g_map_GameObjects[pTank->name]->isVisible = true;
+	}
+	
 	return false;
 }
 

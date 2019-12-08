@@ -15,7 +15,9 @@ std::string cGameBrain::addTank()
 {
 	cGameObject* newTank = new cGameObject(::g_map_GameObjects["tank_template"]);
 	// determine randomly??
-	newTank->positionXYZ = glm::vec3(0,0, -2.0);
+	int xRand = randInRange(-100,100);
+	int yRand = randInRange(-100,100);
+	newTank->positionXYZ = glm::vec3(xRand,yRand, -2.0);
 	newTank->isVisible = true;
 
 	::g_map_GameObjects.insert({newTank->friendlyName,newTank});
