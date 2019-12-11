@@ -4,7 +4,9 @@
 
 ## Professor: Lukas Gustavfson
 
-By David Zuniga Navarro and Jose Daniel Casado Aguilar
+By David Zuniga Navarro and Jose Daniel Casado Aguilar.
+
+The project is also available in `https://github.com/d01000100/tank_game`
 
 ## Build Instructions
 
