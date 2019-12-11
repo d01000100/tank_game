@@ -141,6 +141,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>Serializer.lib;ProtocolManager.lib;glfw3.lib;lua5.3.5-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /s /i /y $(ProjectDir)assets $(TargetDir)assets
+xcopy /s /i /y $(ProjectDir)configFiles $(TargetDir)configFiles</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bRotatable\bRotatable.cpp" />
