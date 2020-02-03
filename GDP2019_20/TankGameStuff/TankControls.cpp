@@ -38,11 +38,12 @@ void cTankControls::InputListen(GLFWwindow* window)
 
 void cTankControls::updateTank()
 {
-	cGameObject* player = ::g_map_GameObjects[tank_name];
+	cGameObject* player = ::g_map_GameObjects.find(tank_name)->second;
+	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
 	if (player)
 	{
 		glm::vec3 velocity = glm::vec3(0);
-		float rotationStep = 2.0f, speed = 10.0f;
+		float rotationStep = 2.0f, speed = 30.0f;
 
 		// check rotation
 		if (pressedKeys.A)
@@ -67,6 +68,14 @@ void cTankControls::updateTank()
 		if (pressedKeys.Space)
 		{
 			fire();
+		}
+
+		if(!player->isVisible)
+		{
+			player->positionXYZ = glm::vec3(0, 2, 0);
+			player->isVisible = true;
+			auto* stTank = theGameBrain->findShooter("player");
+			stTank->isAlive = true;
 		}
 
 		player->velocity = velocity;

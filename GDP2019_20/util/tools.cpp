@@ -516,6 +516,7 @@ void makeTransparentObjectsMap()
 	std::map<std::string, cGameObject*>::iterator itGO;
 	for (itGO = ::g_map_GameObjects.begin(); itGO != ::g_map_GameObjects.end(); itGO++)
 	{
+		//if(!itGO->second){return;}
 		if (itGO->second->alphaTransparency < 1.0f)
 		{
 			float distance = glm::distance(itGO->second->positionXYZ, ::g_pFlyCamera->eye);

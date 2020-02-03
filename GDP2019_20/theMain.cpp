@@ -35,8 +35,9 @@
 #include "GFLW_callbacks.h"// Keyboard, error, mouse, etc. are now here
 //#include "playerController/playerController.h" // playing
 #include "TankGameStuff/TankControls.h"
-
 #include "TankGameStuff/cGameBrain.h"
+// AI Steering Thingy!
+#include "steeringBehaviour/cSteeringBehaviour.hpp"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
@@ -186,17 +187,16 @@ int main(void)
 
 	createSkyBoxObject();
 
-	//::p_LuaScripts = new cLuaBrain();
-	//::p_LuaScripts->LoadScript("./cLuaBrain/script.lua");
-
 	// Se the tank object (by name) to the TankControls
 	cTankControls::setPlayer("player");
 
 	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
-
 	theGameBrain->addTank("player");
-	theGameBrain->addTank("enemy");
-
+	theGameBrain->setPlayerObject("player");
+	//theGameBrain->addTank("enemyA", enemyType::A);
+	//theGameBrain->addTank("enemyB", enemyType::B);
+	//theGameBrain->addTank("enemyC", enemyType::C);
+	//theGameBrain->addTank("enemyD", enemyType::D);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -308,7 +308,8 @@ int main(void)
 		IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
 		// ********************** AABB Runtime Stuff ********************************************
 		theGameBrain->detectCollisions();
-
+		// enemy AI
+		theGameBrain->enemyUpdate();
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
 		glfwSwapBuffers(window);
