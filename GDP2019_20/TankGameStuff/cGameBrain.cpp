@@ -215,10 +215,11 @@ void cGameBrain::addBullet(std::string shooterName)
 
 void cGameBrain::enemyUpdate()
 {
-	for (auto tank : tanks)
+	for (std::vector<sTank*>::iterator iterT = tanks.begin(); iterT != tanks.end(); iterT++)
 	{
 		//if (tank->name == "player") 
 		//{ return; }
+		auto tank = *iterT;
 		cGameObject* theNPC = ::g_map_GameObjects[tank->name];
 		switch (tank->aiType)
 		{
@@ -239,11 +240,20 @@ void cGameBrain::enemyUpdate()
 		default: break;
 		}
 		lookTowardsDirection(theNPC);
+
+		float distance = glm::distance(theNPC->positionXYZ, glm::vec3(0));
+		if (distance > 250.f)
+		{
+			iterT = tanks.erase(iterT);
+			::g_map_GameObjects.erase(tank->name);
+			::g_map_GameObjects.erase(tank->name + "_bullet");
+		}
 	}
 	
 	if(tanks.size() < 7)
 	{
 		int randEnemyType = randInRange(1, 5);
+		std::cout << "randenemy " << randEnemyType << std::endl;
 		std::string name = "enemy_" + std::to_string(randEnemyType) + "_" + std::to_string(tankCounter);
 		addTank(name, enemyType(randEnemyType));
 		tankCounter++;

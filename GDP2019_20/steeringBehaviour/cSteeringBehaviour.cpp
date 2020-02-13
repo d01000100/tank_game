@@ -143,7 +143,7 @@ glm::vec3 pursueBhvr(
 glm::vec3 evadeBhvr(
 	glm::vec3 vehiclePosition, glm::vec3 vehicleVelocity,
 	glm::vec3 target, glm::vec3 targetVelocity,
-	float deltaTime, float maxVelocity = 10.0f)
+	float deltaTime, float maxVelocity = 20.0f)
 {
 	glm::vec3 resultVelocity = glm::vec3(0);
 	glm::vec3 distance = target - vehiclePosition;
