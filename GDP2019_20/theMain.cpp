@@ -203,10 +203,7 @@ int main(void)
 	cTankControls::setPlayer("coordinador");
 
 	auto* flock = new formations::flocking();
-	for(auto vehicle : theCoordinator->vehicles)
-	{
-		flock->boids.push_back(vehicle);
-	}
+	flock->init(&(theCoordinator->vehicles));
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -326,14 +323,10 @@ int main(void)
 		}
 		else
 		{
-			float a = 0.33f, b= 0.33f, c=0.33f;
-			for(auto boid : flock->boids)
-			{
-				boid->velocity += (flock->separation(boid) * a);
-				boid->velocity += (flock->alignment(boid) * b);
-				boid->velocity += (flock->cohesion(boid) * c);
-			}
+			flock->doTheFlocking();
 		}
+
+		formations::coordinator::thePaqman(&::g_map_GameObjects);
 		
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 

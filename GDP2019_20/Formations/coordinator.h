@@ -40,6 +40,7 @@ namespace formations
 		void selectFormationVector(std::vector<glm::vec3>** vecs);
 		void addVehicle(std::map<std::string,cGameObject*>* g_GO);
 		void lookTowardsDirection(cGameObject* vehicle);
+		static void thePaqman(std::map<std::string,cGameObject*>* g_GO);
 	};
 	
 }

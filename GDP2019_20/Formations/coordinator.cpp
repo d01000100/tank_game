@@ -87,6 +87,24 @@ namespace formations
 		if(currentFormation == "TwoLines") *vecs = &twoLinesOffsets;
 	}
 
+	void coordinator::thePaqman(std::map<std::string,cGameObject*>* g_GO)
+	{
+		auto vehicle = g_GO->begin();
+		for(vehicle; vehicle != g_GO->end(); ++vehicle)
+		{
+			auto theGO = vehicle->second;
+			auto pos = theGO->positionXYZ;
+
+			if(theGO->inverseMass < 1.f) continue;
+			
+			if (pos.x > 200.f) theGO->positionXYZ.x = -200.f;
+			if (pos.x < -200.f) theGO->positionXYZ.x = 200.f;
+			
+			if (pos.z > 120.f) theGO->positionXYZ.z = -120.f;
+			if (pos.z < -120.f) theGO->positionXYZ.z = 120.f;
+		}
+	}
+
 	void coordinator::initCircle()
 	{
 		// circle

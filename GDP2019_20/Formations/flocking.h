@@ -7,10 +7,13 @@ namespace formations
 	class flocking
 	{
 	public:
-		std::vector<cGameObject*> boids;		
+		float separationWeight, alignmentWeight, cohesionWeight;
+		std::vector<cGameObject*> boids;
+		void init(std::vector<cGameObject*>* vehicles);
 		glm::vec3 separation(cGameObject* self);
 		glm::vec3 alignment(cGameObject* self);
 		glm::vec3 cohesion(cGameObject* self);
+		void doTheFlocking();
 	};
 }
 

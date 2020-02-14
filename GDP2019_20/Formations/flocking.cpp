@@ -5,6 +5,15 @@
 
 namespace formations
 {
+	void flocking::init(std::vector<cGameObject*>* vehicles)
+	{
+		separationWeight = alignmentWeight = cohesionWeight = 0.33f;
+		for(auto vehicle : *vehicles)
+		{
+			boids.push_back(vehicle);
+		}
+	}
+	
 	glm::vec3 flocking::separation(cGameObject* self)
 	{
 		float maxVelocity = 10.f;
@@ -97,7 +106,18 @@ namespace formations
 					target, glm::vec3(0),
 					(1/60.f), steeringType::seek);
 		}
+		steerForce.y = 0.f;
 		return steerForce;
+	}
+
+	void flocking::doTheFlocking()
+	{
+		for(auto boid : boids)
+		{
+			boid->velocity += (separation(boid) * separationWeight);
+			boid->velocity += (alignment(boid) * alignmentWeight);
+			boid->velocity += (cohesion(boid) * cohesionWeight);
+		}
 	}
 	
 }
