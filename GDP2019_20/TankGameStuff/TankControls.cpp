@@ -70,13 +70,13 @@ void cTankControls::updateTank()
 			fire();
 		}
 
-		if(!player->isVisible)
-		{
-			player->positionXYZ = glm::vec3(0, 2, 0);
-			player->isVisible = true;
-			auto* stTank = theGameBrain->findShooter("player");
-			stTank->isAlive = true;
-		}
+		//if(!player->isVisible)
+		//{
+		//	player->positionXYZ = glm::vec3(0, 2, 0);
+		//	player->isVisible = true;
+		//	//auto* stTank = theGameBrain->findShooter("player");
+		//	//stTank->isAlive = true;
+		//}
 
 		player->velocity = velocity;
 	}

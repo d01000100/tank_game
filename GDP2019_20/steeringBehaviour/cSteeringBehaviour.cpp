@@ -182,7 +182,8 @@ glm::vec3 cSteeringBehaviour::Update(glm::vec3 vehiclePosition,
 	{
 	case steeringType::seek:
 		resultVelocity = seekBhvr(vehiclePosition, 
-			vehicleVelocity, target, deltaTime);
+			vehicleVelocity, target, 
+			deltaTime, 40.f);
 		break;
 	case steeringType::flee:
 		resultVelocity = fleeBhvr(vehiclePosition, 

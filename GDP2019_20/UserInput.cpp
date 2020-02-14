@@ -16,6 +16,7 @@
 #include "cFlyCamera/cFlyCamera.h"
 #include "playerController/playerController.h"
 //#include "cLuaBrain/cLuaBrain.h"
+#include "Formations/coordinator.h"
 #include "TankGameStuff/TankControls.h"
 
 bool isOnlyShiftKeyDown(int mods);
@@ -646,6 +647,8 @@ void ProcessAsyncMouse(GLFWwindow* window)
 
 void ProcessAsyncKeys(GLFWwindow* window)
 {
+	auto* theCoordinator = formations::coordinator::getTheCoordinator();
+	
 	const float CAMERA_MOVE_SPEED_SLOW = 0.1f;
 	const float CAMERA_MOVE_SPEED_FAST = 1.0f;
 	const float CAMERA_TURN_SPEED = 0.1f;
@@ -752,6 +755,34 @@ void ProcessAsyncKeys(GLFWwindow* window)
 		//	pPlayerControl->Roll_CW_CCW(playerAngle);
 		//}
 		//// Player Control
+		
+		//// Change formations
+		//if(currentFormation == "Circle") *vecs = &circleOffsets;
+		//if(currentFormation == "Vee") *vecs = &veeOffsets;
+		//if(currentFormation == "Square") *vecs = &squareOffsets;
+		//if(currentFormation == "Line") *vecs = &lineOffsets;
+		//if(currentFormation == "TwoLines") *vecs = &twoLinesOffsets;
+
+		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+		{
+			theCoordinator->currentFormation = "Circle";
+		}
+		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+		{
+			theCoordinator->currentFormation = "Vee";
+		}
+		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+		{
+			theCoordinator->currentFormation = "Square";
+		}
+		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		{
+			theCoordinator->currentFormation = "Line";
+		}
+		if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+		{
+			theCoordinator->currentFormation = "TwoLines";
+		}
 
 	}//if(AreAllModifiersUp(window)
 

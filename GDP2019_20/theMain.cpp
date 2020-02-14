@@ -38,6 +38,7 @@
 #include "TankGameStuff/cGameBrain.h"
 // AI Steering Thingy!
 #include "steeringBehaviour/cSteeringBehaviour.hpp"
+#include "Formations/coordinator.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
@@ -187,16 +188,19 @@ int main(void)
 
 	createSkyBoxObject();
 
-	// Se the tank object (by name) to the TankControls
-	cTankControls::setPlayer("player");
 
-	cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
-	theGameBrain->addTank("player");
-	theGameBrain->setPlayerObject("player");
+	//cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
+	//theGameBrain->addTank("player");
+	//theGameBrain->setPlayerObject("player");
 	//theGameBrain->addTank("enemyA", enemyType::A);
 	//theGameBrain->addTank("enemyB", enemyType::B);
 	//theGameBrain->addTank("enemyC", enemyType::C);
 	//theGameBrain->addTank("enemyD", enemyType::D);
+
+	auto* theCoordinator = formations::coordinator::getTheCoordinator();
+	theCoordinator->init(&::g_map_GameObjects);
+	// Se the tank object (by name) to the TankControls
+	cTankControls::setPlayer("coordinador");
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -296,10 +300,12 @@ int main(void)
 
 		// Update the player's tank according to the state of the player's input
 		cTankControls::InputListen(window);
+		//// enemy AI
+		//theGameBrain->detectCollisions();
+		//theGameBrain->enemyUpdate();
 
 		//	Update the objects through physics
 		averageDeltaTime = avgDeltaTimeThingy.getAverage();
-		//::p_LuaScripts->Update(averageDeltaTime);
 		
 		//pPhysic->IntegrationStep(::g_map_GameObjects, (float)averageDeltaTime);
 		//pPhysic->TestForCollisions(::g_map_GameObjects);
@@ -307,9 +313,9 @@ int main(void)
 		//testCollisions_AABB(::g_map_GameObjects["tieInterceptor"]);
 		IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
 		// ********************** AABB Runtime Stuff ********************************************
-		theGameBrain->detectCollisions();
-		// enemy AI
-		theGameBrain->enemyUpdate();
+
+		theCoordinator->update();
+		
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 
 		glfwSwapBuffers(window);
