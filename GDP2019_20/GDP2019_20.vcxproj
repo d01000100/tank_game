@@ -150,6 +150,7 @@
     <ClCompile Include="cLight.cpp" />
     <ClCompile Include="cLowPassFilter.cpp" />
     <ClCompile Include="cModelLoader.cpp" />
+    <ClCompile Include="Formations\flocking.cpp" />
     <ClCompile Include="Formations\coordinator.cpp" />
     <ClCompile Include="cPhysics.cpp" />
     <ClCompile Include="cPhysics_Ericson.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="cLowPassFilter.h" />
     <ClInclude Include="cMesh.h" />
     <ClInclude Include="cModelLoader.h" />
+    <ClInclude Include="Formations\flocking.h" />
     <ClInclude Include="Formations\coordinator.h" />
     <ClInclude Include="cPhysics.h" />
     <ClInclude Include="cShaderManager.h" />

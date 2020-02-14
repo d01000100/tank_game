@@ -783,6 +783,14 @@ void ProcessAsyncKeys(GLFWwindow* window)
 		{
 			theCoordinator->currentFormation = "TwoLines";
 		}
+		if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+		{
+			isDroneOn = false;
+		}
+		if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+		{
+			isDroneOn = true;
+		}
 
 	}//if(AreAllModifiersUp(window)
 

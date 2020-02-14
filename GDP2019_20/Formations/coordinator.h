@@ -16,7 +16,6 @@ namespace formations
 		std::vector<glm::vec3> lineOffsets;
 		std::vector<glm::vec3> twoLinesOffsets;
 		
-		std::vector<cGameObject*> vehicles;
 
 		template <class T>
 		static T randInRange(T min, T max)
@@ -26,6 +25,8 @@ namespace formations
 
 		cGameObject* self;
 		std::string currentFormation;
+		std::vector<cGameObject*> vehicles;
+		
 		static coordinator* getTheCoordinator();
 		void init(std::map<std::string,cGameObject*>* g_GO);
 		void update();

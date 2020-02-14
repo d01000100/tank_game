@@ -182,6 +182,9 @@
     <ClCompile Include="Formations\coordinator.cpp">
       <Filter>Formations</Filter>
     </ClCompile>
+    <ClCompile Include="Formations\flocking.cpp">
+      <Filter>Formations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cModelLoader.h">
@@ -293,6 +296,9 @@
       <Filter>SteeringBehaviour</Filter>
     </ClInclude>
     <ClInclude Include="Formations\coordinator.h">
+      <Filter>Formations</Filter>
+    </ClInclude>
+    <ClInclude Include="Formations\flocking.h">
       <Filter>Formations</Filter>
     </ClInclude>
   </ItemGroup>
