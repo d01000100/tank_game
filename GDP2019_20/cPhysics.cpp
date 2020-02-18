@@ -173,14 +173,14 @@ void cPhysics::TestForCollisions(std::map<std::string, cGameObject*> g_map_GameO
 					vecCollisions.push_back(collisionInfo);
 				}
 			}
-			else if (pA->physicsShapeType == SPHERE &&
-					 pB->physicsShapeType == MESH)
-			{
-				if (DoShphereMeshCollisionTest(pA, pB, collisionInfo))
-				{
-					vecCollisions.push_back(collisionInfo);
-				}
-			}
+			//else if (pA->physicsShapeType == SPHERE &&
+			//		 pB->physicsShapeType == MESH)
+			//{
+			//	if (DoShphereMeshCollisionTest(pA, pB, collisionInfo))
+			//	{
+			//		vecCollisions.push_back(collisionInfo);
+			//	}
+			//}
 		}//for (unsigned int innerLoopIndex = 0;
 	}//for (unsigned int outerLoopIndex = 0;
 
@@ -192,26 +192,29 @@ bool cPhysics::DoSphereSphereCollisionTest(cGameObject* pA, cGameObject* pB,
 	// get vector from sphere centers
 	glm::vec3 ABvec = pB->positionXYZ - pA->positionXYZ;
 	glm::vec3 BAvec = pA->positionXYZ - pB->positionXYZ;
-	if (glm::length(ABvec) <= 1.0f)
+	if (glm::length(ABvec) <= 10.0f)
 	{
-		float correctionDist = 1.0f - glm::length(BAvec);
+		float correctionDist = 10.0f - glm::length(BAvec);
 		glm::vec3 correctionVector = glm::normalize(BAvec) * correctionDist;
-		pA->positionXYZ = pA->positionXYZ + correctionVector;
+		correctionVector.y = 0.f;
+		pA->positionXYZ = pA->positionXYZ + (correctionVector*1.5f);
 
 		glm::vec3 velocityVector = glm::normalize(pA->velocity);
 		glm::vec3 reflectionVec = glm::reflect(velocityVector, glm::normalize(BAvec));
 		reflectionVec = glm::normalize(reflectionVec);
 		float speed = glm::length(pA->velocity);
-		pA->velocity = reflectionVec * speed * dampSpeed;
+		//pA->velocity += reflectionVec * speed * dampSpeed;
+		//pA->velocity.y = 0;
 
 		glm::vec3 velocityVectorB = glm::normalize(pB->velocity);
 		glm::vec3 reflectionVecB = glm::reflect(velocityVectorB, glm::normalize(ABvec));
 		reflectionVecB = glm::normalize(reflectionVecB);
 		float speedB = glm::length(pB->velocity);
-		pB->velocity = reflectionVecB * speedB * dampSpeed;
+		//pB->velocity += reflectionVecB * speedB * dampSpeed;
+		//pB->velocity.y = 0;
 
-		pA->objectColourRGBA = glm::vec4(get_random(0.0,1.0), get_random(0.0, 1.0), get_random(0.0, 1.0),1.0f);
-		pB->objectColourRGBA = glm::vec4(get_random(0.0, 1.0), get_random(0.0, 1.0), get_random(0.0, 1.0), 1.0f);
+		//pA->objectColourRGBA = glm::vec4(get_random(0.0,1.0), get_random(0.0, 1.0), get_random(0.0, 1.0),1.0f);
+		//pB->objectColourRGBA = glm::vec4(get_random(0.0, 1.0), get_random(0.0, 1.0), get_random(0.0, 1.0), 1.0f);
 
 		std::cout << "pA: " << glm::to_string(pA->positionXYZ) << std::endl;
 		std::cout << "pB: " << glm::to_string(pB->positionXYZ) << std::endl;

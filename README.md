@@ -17,15 +17,22 @@
 WASD  - moves the yellow tank (player) around.
 Space - shoot, can only shoot one bullet at a time.
 
-## What's going on?
+## Controls!
 
-To make it more iteresting, there are always 6 enemies in scene, 
-if one dies another tank of random type is generated somewhere on the map.
+1 - Circle Formation
+2 - V Formation
+3 - Square Formation
+4 - Line Formation
+5 - Two Rows Formation
+6 - Perform Flocking
+7 - Regroup to last formation setting
+8 - Start Path following
+9 - Reverse the Path
+0 - Stop path following
 
-### Type-Color relation:
-
-Yellow  -> Player
-Red     -> A
-Blue    -> B
-White   -> C
-Green   -> D
+Ctrl + 1 - Increase separation weight
+Ctrl + 2 - Increase separation weight
+Ctrl + 3 - Increase alignment weight
+Ctrl + 4 - Increase alignment weight
+Ctrl + 5 - Increase cohesion weight
+Ctrl + 6 - Increase cohesion weight

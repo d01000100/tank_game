@@ -185,6 +185,9 @@
     <ClCompile Include="Formations\flocking.cpp">
       <Filter>Formations</Filter>
     </ClCompile>
+    <ClCompile Include="Formations\pathFollower.cpp">
+      <Filter>Formations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cModelLoader.h">
@@ -299,6 +302,9 @@
       <Filter>Formations</Filter>
     </ClInclude>
     <ClInclude Include="Formations\flocking.h">
+      <Filter>Formations</Filter>
+    </ClInclude>
+    <ClInclude Include="Formations\pathFollower.h">
       <Filter>Formations</Filter>
     </ClInclude>
   </ItemGroup>

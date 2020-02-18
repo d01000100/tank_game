@@ -40,6 +40,7 @@
 #include "steeringBehaviour/cSteeringBehaviour.hpp"
 #include "Formations/coordinator.h"
 #include "Formations/flocking.h"
+#include "Formations/pathFollower.h"
 
 cFlyCamera* g_pFlyCamera = NULL;
 cGameObject* pSkyBox = new cGameObject();
@@ -61,7 +62,7 @@ GLuint shaderProgID;
 cVAOManager* pTheVAOManager = new cVAOManager();
 cModelLoader* pTheModelLoader = new cModelLoader();
 cDebugRenderer* pDebugRenderer = new cDebugRenderer();
-//cPhysics* pPhysic = new cPhysics();
+cPhysics* pPhysic = new cPhysics();
 cBasicTextureManager* pTextureManager = NULL;
 extern std::map<unsigned long long /*ID*/, cAABB*> g_mapAABBs_World;
 playerController* pPlayerControl;
@@ -71,7 +72,7 @@ playerController* pPlayerControl;
 // pirateStuff
 double timer = 0.0;
 double averageDeltaTime;
-bool isDroneOn = false;
+bool isDroneOn = true;
 bool cameraFollowPlayer = false;
 
 // Load up my "scene" objects (now global)
@@ -188,8 +189,7 @@ int main(void)
 	std::cout << "start loop!" << std::endl;
 
 	createSkyBoxObject();
-
-
+	
 	//cGameBrain* theGameBrain = cGameBrain::getTheGameBrain();
 	//theGameBrain->addTank("player");
 	//theGameBrain->setPlayerObject("player");
@@ -202,8 +202,11 @@ int main(void)
 	theCoordinator->init(&::g_map_GameObjects);
 	cTankControls::setPlayer("coordinador");
 
-	auto* flock = new formations::flocking();
-	flock->init(&(theCoordinator->vehicles));
+	auto* theFlock = formations::flocking::getTheFlocking();
+	theFlock->init(&(theCoordinator->vehicles));
+
+	auto* thePathFollow = formations::pathFollower::getThePathFollower();
+	thePathFollow->init(&::g_map_GameObjects);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -311,10 +314,10 @@ int main(void)
 		averageDeltaTime = avgDeltaTimeThingy.getAverage();
 		
 		//pPhysic->IntegrationStep(::g_map_GameObjects, (float)averageDeltaTime);
-		//pPhysic->TestForCollisions(::g_map_GameObjects);
 		// ********************** AABB Runtime Stuff ********************************************
 		//testCollisions_AABB(::g_map_GameObjects["tieInterceptor"]);
 		IntegrationStep_AAB(::g_map_GameObjects, (float)averageDeltaTime);
+		pPhysic->TestForCollisions(::g_map_GameObjects);
 		// ********************** AABB Runtime Stuff ********************************************
 
 		if(isDroneOn)
@@ -323,10 +326,14 @@ int main(void)
 		}
 		else
 		{
-			flock->doTheFlocking();
+			theFlock->doTheFlocking();
+			formations::coordinator::thePaqman(&::g_map_GameObjects);
+		}
+		if(thePathFollow->isActive && isDroneOn)
+		{
+			thePathFollow->update();
 		}
 
-		formations::coordinator::thePaqman(&::g_map_GameObjects);
 		
 		pDebugRenderer->RenderDebugObjects(v, p, 0.01f);
 

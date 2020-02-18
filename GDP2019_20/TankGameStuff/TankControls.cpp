@@ -58,16 +58,19 @@ void cTankControls::updateTank()
 		// check velocity
 		if (pressedKeys.W)
 		{
-			velocity += player->getCurrentAT() * speed;
+			//velocity += player->getCurrentAT() * speed;
+			player->velocity = player->getCurrentAT() * speed;
 		}
 		if (pressedKeys.S)
 		{
-			velocity += player->getCurrentAT() * -speed;
+			//velocity += player->getCurrentAT() * -speed;
+			player->velocity = player->getCurrentAT() * -speed;
 		}
 
 		if (pressedKeys.Space)
 		{
-			fire();
+			//fire();
+			player->velocity = glm::vec3(0);
 		}
 
 		//if(!player->isVisible)
@@ -78,7 +81,7 @@ void cTankControls::updateTank()
 		//	//stTank->isAlive = true;
 		//}
 
-		player->velocity = velocity;
+		//player->velocity = velocity;
 	}
 }
 

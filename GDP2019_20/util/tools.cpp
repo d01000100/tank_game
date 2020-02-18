@@ -1,4 +1,6 @@
 #include "tools.h"
+
+#include "../Formations/flocking.h"
 #include "../TankGameStuff/cGameBrain.h"
 
 #include "../TankGameStuff/TankControls.h"
@@ -315,6 +317,7 @@ std::string GLMvec3toString(glm::vec3 theGLMvec3)
 
 void setWindowTitle(std::stringstream* ssTitle)
 {
+	auto theFlock = formations::flocking::getTheFlocking();
 	*ssTitle << cTankControls::keysInfo() << " ";
 	switch (cursorType)
 	{
@@ -334,7 +337,13 @@ void setWindowTitle(std::stringstream* ssTitle)
 		break;
 	case selectedType::SOUND:break;
 	}
+	float total = theFlock->separationWeight + theFlock->alignmentWeight + theFlock->cohesionWeight;
 	*ssTitle << " || FPS: " << (int)(1 / averageDeltaTime);
+	*ssTitle << " || sep: " << theFlock->separationWeight;
+	*ssTitle << " ali: " << theFlock->alignmentWeight;
+	*ssTitle << " coh: " << theFlock->cohesionWeight;
+	*ssTitle << " total: " << total;
+	
 	//*ssTitle << " isDroneOn: " << isDroneOn;
 	//*ssTitle << "   Tgt: " << GLMvec3toString(cameraTarget);
 	//*ssTitle << "   Vis: " << GLMvec3toString(visionVector);

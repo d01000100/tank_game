@@ -11,7 +11,7 @@ namespace formations
 	
 	void coordinator::init(std::map<std::string,cGameObject*>* g_GO)
 	{
-		currentFormation = "Vee";
+		currentFormation = "Circle";
 		
 		auto* vehicle = new cGameObject(g_GO->at("tank_template"));
 		vehicle->positionXYZ = glm::vec3(0, 15.f, 0);
@@ -19,6 +19,8 @@ namespace formations
 		vehicle->textures = { "blueTank.bmp","","","" };
 		g_GO->insert({vehicle->friendlyName,vehicle});
 		this->self = vehicle;
+		this->self ->setAT(glm::vec3(0,0,-1));
+		this->self->physicsShapeType = UNKNOWN;
 
 		initCircle();
 		initLine();
@@ -36,10 +38,20 @@ namespace formations
 	{
 		std::vector<glm::vec3>* theFormationOffsets{};
 		selectFormationVector(&theFormationOffsets);
+
+		if(!theFormationOffsets) return;
+
+		auto selfMatrix = calculateWorldMatrix(self);
+		lookTowardsDirection(self);
 		
 		for(auto i=0;i<12;i++)
 		{
-			glm::vec3 target = (*theFormationOffsets)[i] + self->positionXYZ;
+			auto theOffset = (*theFormationOffsets)[i];
+			glm::vec4 offVec4(theOffset,1);
+			glm::vec4 targV4 = selfMatrix *offVec4;
+			
+			//glm::vec3 target = (*theFormationOffsets)[i] + self->positionXYZ;
+			glm::vec3 target(targV4);
 			float dist = glm::distance(vehicles[i]->positionXYZ,target);
 			if(dist > 1.f)
 			{
@@ -74,8 +86,11 @@ namespace formations
 
 	void coordinator::lookTowardsDirection(cGameObject* vehicle)
 	{
-		glm::vec3 desiredAT = glm::normalize(vehicle->velocity);
-		vehicle->setAT(desiredAT);
+		if(glm::length(vehicle->velocity)>0.f)
+		{
+			glm::vec3 desiredAT = glm::normalize(vehicle->velocity);
+			vehicle->setAT(desiredAT);
+		}
 	}
 
 	void coordinator::selectFormationVector(std::vector<glm::vec3>** vecs)
@@ -190,6 +205,41 @@ namespace formations
 		twoLinesOffsets.push_back(glm::vec3(-20,15,20));
 		twoLinesOffsets.push_back(glm::vec3(35,15,20));
 		twoLinesOffsets.push_back(glm::vec3(-35,15,20));
+	}
+
+	glm::mat4 coordinator::calculateWorldMatrix(cGameObject* pCurrentObject)
+	{
+		glm::mat4 matWorld = glm::mat4(1.0f);
+		// ******* TRANSLATION TRANSFORM *********
+		glm::mat4 matTrans
+			= glm::translate(glm::mat4(1.0f),
+				glm::vec3(pCurrentObject->positionXYZ.x,
+					pCurrentObject->positionXYZ.y,
+					pCurrentObject->positionXYZ.z));
+		matWorld = matWorld * matTrans;
+		// ******* TRANSLATION TRANSFORM *********
+
+		// ******* ROTATION TRANSFORM *********
+		glm::mat4 matRotation = glm::mat4(pCurrentObject->getQOrientation());
+		matWorld = matWorld * matRotation;
+		// ******* ROTATION TRANSFORM *********
+
+		// ******* SCALE TRANSFORM *********
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f),
+			glm::vec3(pCurrentObject->scale,
+				pCurrentObject->scale,
+				pCurrentObject->scale));
+		matWorld = matWorld * scale;
+		// ******* SCALE TRANSFORM *********
+		return matWorld;
+	}
+
+	void coordinator::correctVerticalAlignment()
+	{
+		for(auto i=0;i<12;i++)
+		{
+			vehicles[i]->positionXYZ.y = 15.f;
+		}
 	}
 	
 }

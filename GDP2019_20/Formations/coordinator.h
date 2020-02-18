@@ -35,12 +35,14 @@ namespace formations
 		void initSquare();
 		void initLine();
 		void initTwoLine();
-		
+
 		//utils
 		void selectFormationVector(std::vector<glm::vec3>** vecs);
 		void addVehicle(std::map<std::string,cGameObject*>* g_GO);
 		void lookTowardsDirection(cGameObject* vehicle);
 		static void thePaqman(std::map<std::string,cGameObject*>* g_GO);
+		glm::mat4 calculateWorldMatrix(cGameObject* pCurrentObject);
+		void correctVerticalAlignment();
 	};
 	
 }

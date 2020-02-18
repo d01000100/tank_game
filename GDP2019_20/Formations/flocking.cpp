@@ -5,6 +5,13 @@
 
 namespace formations
 {
+	flocking* flocking::theFlocking_ = new flocking();
+	
+	flocking* flocking::getTheFlocking()
+	{
+		return theFlocking_;
+	}
+
 	void flocking::init(std::vector<cGameObject*>* vehicles)
 	{
 		separationWeight = alignmentWeight = cohesionWeight = 0.33f;
@@ -112,6 +119,11 @@ namespace formations
 
 	void flocking::doTheFlocking()
 	{
+		// calculate weights
+		separationWeight = separationWeight/(separationWeight+alignmentWeight+cohesionWeight);
+		alignmentWeight = alignmentWeight/(separationWeight+alignmentWeight+cohesionWeight);
+		cohesionWeight = cohesionWeight/(separationWeight+alignmentWeight+cohesionWeight);
+		
 		for(auto boid : boids)
 		{
 			boid->velocity += (separation(boid) * separationWeight);
@@ -119,6 +131,29 @@ namespace formations
 			boid->velocity += (cohesion(boid) * cohesionWeight);
 		}
 	}
-	
+
+	void flocking::moveSeparationWeight(float x)
+	{
+		if(this->separationWeight < 0.98f)
+		{
+			this->separationWeight += x;
+		}
+	}
+
+	void flocking::moveAlignmentWeight(float x)
+	{
+		if(this->separationWeight < 0.98f)
+		{
+			this->alignmentWeight += x;
+		}
+	}
+
+	void flocking::moveCohesionWeight(float x)
+	{
+		if(this->separationWeight < 0.98f)
+		{
+			this->cohesionWeight += x;
+		}
+	}
 }
 

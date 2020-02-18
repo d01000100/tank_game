@@ -16,8 +16,10 @@
 #include "cFlyCamera/cFlyCamera.h"
 #include "playerController/playerController.h"
 //#include "cLuaBrain/cLuaBrain.h"
+//#include "TankGameStuff/TankControls.h"
 #include "Formations/coordinator.h"
-#include "TankGameStuff/TankControls.h"
+#include "Formations/flocking.h"
+#include "Formations/pathFollower.h"
 
 bool isOnlyShiftKeyDown(int mods);
 bool isOnlyCtrlKeyDown(int mods);
@@ -26,6 +28,7 @@ bool isShiftDown(GLFWwindow* window);
 bool isCtrlDown(GLFWwindow* window);
 bool isAltDown(GLFWwindow* window);
 bool areAllModifiersUp(GLFWwindow* window);
+auto* thePathFollow = formations::pathFollower::getThePathFollower();
 
 bool g_MouseIsInsideWindow = false;
 bool g_MouseLeftButtonIsDown = false;
@@ -107,13 +110,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 		if (key == GLFW_KEY_F3 && action == GLFW_PRESS)
 		{
-			bool tempBool;
-			tempBool = ::pSkyBox->isVisible;
-			tempBool = !tempBool;
+			::pSkyBox->isVisible = !::pSkyBox->isVisible;
 		}
 		if (key == GLFW_KEY_Z && action == GLFW_PRESS)
 		{
 			::g_map_GameObjects["cameraPosition0"]->positionXYZ = ::g_pFlyCamera->eye;
+		}
+		if (key == GLFW_KEY_9 && action == GLFW_PRESS)
+		{
+			thePathFollow->isReverse = !thePathFollow->isReverse;
+			std::cout << "isReverse: " << thePathFollow->isReverse << std::endl;
 		}
 	}
 
@@ -327,38 +333,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 			}
 		}
 		// </Object Rotation> ******************************************************
-
-		// <Color Moving> **********************************************************
-		// move the light
-		if (key == GLFW_KEY_UP)
-		{
-			theSelectedGO->objectColourRGBA.r -= 0.2f;
-		}
-		if (key == GLFW_KEY_UP)
-		{
-			theSelectedGO->objectColourRGBA.r += 0.2f;
-		}
-
-		// Move the camera (Q & E for up and down, along the y axis)
-		if (key == GLFW_KEY_LEFT)
-		{
-			theSelectedGO->objectColourRGBA.g += 0.2f;
-		}
-		if (key == GLFW_KEY_RIGHT)
-		{
-			theSelectedGO->objectColourRGBA.g -= 0.2f;
-		}
-
-		// Move the camera (W & S for towards and away, along the z axis)
-		if (key == GLFW_KEY_PERIOD)
-		{
-			theSelectedGO->objectColourRGBA.b += 0.2f;
-		}
-		if (key == GLFW_KEY_COMMA)
-		{
-			theSelectedGO->objectColourRGBA.b -= 0.2f;
-		}
-		// </Color Moving>****************************************************************************
 
 	}//if (isShiftKeyDownByAlone(mods))
 
@@ -648,6 +622,8 @@ void ProcessAsyncMouse(GLFWwindow* window)
 void ProcessAsyncKeys(GLFWwindow* window)
 {
 	auto* theCoordinator = formations::coordinator::getTheCoordinator();
+	auto* theFlock = formations::flocking::getTheFlocking();
+	
 	
 	const float CAMERA_MOVE_SPEED_SLOW = 0.1f;
 	const float CAMERA_MOVE_SPEED_FAST = 1.0f;
@@ -791,6 +767,15 @@ void ProcessAsyncKeys(GLFWwindow* window)
 		{
 			isDroneOn = true;
 		}
+		if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
+		{
+			thePathFollow->isActive = true;
+		}
+		if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)
+		{
+			thePathFollow->isActive = false;
+			thePathFollow->self->velocity = glm::vec3(0.f);
+		}
 
 	}//if(AreAllModifiersUp(window)
 
@@ -809,6 +794,35 @@ void ProcessAsyncKeys(GLFWwindow* window)
 			//			::g_pFlyCamera->MoveUpDown_Y( -cameraSpeed );
 		}
 	}//IsShiftDown(window)
+
+	if(isCtrlDown(window))
+	{
+		// add and subtract to weights!
+		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)	// "up"
+		{
+			theFlock->moveSeparationWeight(0.01f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)	// "up"
+		{
+			theFlock->moveSeparationWeight(-0.01f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)	// "up"
+		{
+			theFlock->moveAlignmentWeight(0.01f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)	// "up"
+		{
+			theFlock->moveAlignmentWeight(-0.01f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)	// "up"
+		{
+			theFlock->moveCohesionWeight(0.01f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)	// "up"
+		{
+			theFlock->moveCohesionWeight(-0.01f);
+		}
+	}
 	
 	return;
 }// ProcessAsyncKeys(..
